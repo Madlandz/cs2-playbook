@@ -20,7 +20,6 @@
     --smoke:#9aa7b2;
     --flash:#f2e6b8;
     --molly:#e05548;
-    --he:#a3b56a;
     --radius:6px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -44,7 +43,6 @@
   }
   .wrap{max-width:1100px;margin:0 auto;padding:0 20px;position:relative}
 
-  /* ---------- header ---------- */
   header{padding:44px 0 26px;border-bottom:1px solid var(--line)}
   .stamp{
     font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
@@ -58,8 +56,14 @@
   }
   h1 .half{color:var(--ct-blue)}
   .sub{color:var(--muted);max-width:560px}
+  .hint{
+    display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;
+    color:var(--flash);text-transform:uppercase;
+    border:1px dashed rgba(242,230,184,.4);border-radius:var(--radius);padding:6px 12px;
+  }
+  .hint::before{content:"◎"}
 
-  /* ---------- roles ---------- */
   .roles{display:flex;gap:8px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line)}
   .role{
     display:flex;align-items:baseline;gap:8px;
@@ -68,12 +72,10 @@
   }
   .role b{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);letter-spacing:.08em}
 
-  /* ---------- rules ---------- */
   .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:22px 0 30px}
   .rule{background:var(--panel-2);padding:14px 16px;font-size:13.5px;color:var(--muted)}
   .rule b{color:var(--text);display:block;font-weight:600;margin-bottom:2px}
 
-  /* ---------- map tabs ---------- */
   nav.veto{
     position:sticky;top:0;z-index:10;
     background:rgba(11,15,20,.92);backdrop-filter:blur(6px);
@@ -95,8 +97,96 @@
     font-family:'JetBrains Mono',monospace;font-size:9px;vertical-align:super;
     color:var(--ct-blue);letter-spacing:.1em;margin-left:3px;
   }
+  nav.veto button.econ-tab{margin-left:auto;border-left:1px solid var(--line);padding-left:22px}
+  nav.veto button.econ-tab[aria-selected="true"]{color:var(--ct-blue);border-bottom-color:var(--ct-blue)}
 
-  /* ---------- map panels ---------- */
+  /* ---------- economy section ---------- */
+  .econ-intro{color:var(--muted);max-width:640px;margin-bottom:22px}
+  .buyladder{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:22px;
+  }
+  .rung{background:var(--panel);padding:14px 16px;position:relative}
+  .rung .price{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+    color:var(--ct-blue);text-transform:uppercase;
+  }
+  .rung h4{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:22px;
+    text-transform:uppercase;letter-spacing:.04em;margin:2px 0 8px;
+  }
+  .rung ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .rung li{font-size:13px;color:var(--muted);padding-left:12px;position:relative}
+  .rung li::before{content:"·";position:absolute;left:2px;color:var(--ct-blue)}
+  .rung li b{color:var(--text);font-weight:600}
+
+  .flowgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:22px}
+  .flow{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ct-blue);border-radius:var(--radius);padding:16px}
+  .flow h3{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:22px;
+    text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;
+  }
+  .flow .kind{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--muted);text-transform:uppercase;
+  }
+  .decision{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .branch{
+    font-size:13.5px;color:var(--text);padding:8px 12px;border-radius:4px;
+    background:var(--panel-2);border-left:2px solid var(--line);
+  }
+  .branch b{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    color:var(--t-orange);text-transform:uppercase;display:block;margin-bottom:2px;
+  }
+  .branch.yes{border-left-color:var(--he,#a3b56a)}
+  .branch.yes b{color:#a3b56a}
+  .branch.no{border-left-color:var(--molly)}
+  .branch.no b{color:var(--molly)}
+
+  .lossbonus{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px;margin-bottom:22px;overflow-x:auto;
+  }
+  .lossbonus h3{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+    color:var(--t-orange);text-transform:uppercase;margin-bottom:10px;
+  }
+  .lossbonus table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px}
+  .lossbonus th,.lossbonus td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  .lossbonus th{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    color:var(--muted);text-transform:uppercase;font-weight:400;
+  }
+  .lossbonus td{color:var(--text)}
+  .lossbonus td:first-child{
+    font-family:'JetBrains Mono',monospace;color:var(--ct-blue);width:60px;
+  }
+  .lossbonus td:nth-child(2){color:var(--flash);font-family:'JetBrains Mono',monospace}
+  .lossbonus td.max{color:var(--t-orange)}
+
+  .roundtypes{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;
+  }
+  .rtype{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+  .rtype .tag{
+    display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    letter-spacing:.12em;padding:2px 8px;border-radius:3px;text-transform:uppercase;margin-bottom:6px;
+  }
+  .rtype .tag.full{background:rgba(163,181,106,.15);color:#a3b56a;border:1px solid rgba(163,181,106,.4)}
+  .rtype .tag.force{background:rgba(232,163,61,.15);color:var(--t-orange);border:1px solid rgba(232,163,61,.4)}
+  .rtype .tag.eco{background:rgba(224,85,72,.15);color:var(--molly);border:1px solid rgba(224,85,72,.4)}
+  .rtype .tag.semi{background:rgba(92,168,232,.15);color:var(--ct-blue);border:1px solid rgba(92,168,232,.4)}
+  .rtype h4{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:20px;
+    text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;
+  }
+  .rtype p{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .rtype .rule-line{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);
+    letter-spacing:.05em;padding-top:6px;border-top:1px dashed var(--line);margin-top:4px;
+  }
+
   section.map{display:none;padding:30px 0 10px}
   section.map.active{display:block}
   .map-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
@@ -130,6 +220,8 @@
   }
   .util{list-style:none;margin:12px 0 10px;display:flex;flex-direction:column;gap:6px}
   .util li{display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--muted)}
+  .util li[data-f]{cursor:crosshair;border-radius:4px;padding:2px 4px;margin:-2px -4px;transition:background .12s}
+  .util li[data-f]:hover,.util li[data-f]:focus-visible{background:rgba(232,163,61,.1);outline:none;color:var(--text)}
   .util .who{
     font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);
     min-width:34px;letter-spacing:.06em;
@@ -160,7 +252,26 @@
   }
   .note b{color:var(--t-orange)}
 
-  /* ---------- systems footer ---------- */
+  /* ---------- hover mini-map tooltip ---------- */
+  #tip{
+    position:fixed;z-index:100;display:none;
+    background:var(--panel-2);border:1px solid var(--t-orange);border-radius:var(--radius);
+    box-shadow:0 10px 30px rgba(0,0,0,.6);
+    padding:10px 10px 8px;width:246px;pointer-events:none;
+  }
+  #tip .tip-head{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;display:flex;justify-content:space-between;gap:8px;margin-bottom:6px;
+  }
+  #tip .tip-route{color:var(--t-orange)}
+  #tip .tip-map{color:var(--muted)}
+  #tip svg{display:block;background:#0a0e13;border:1px solid var(--line);border-radius:4px}
+  #tip .tip-note{font-size:11px;color:var(--muted);margin-top:6px}
+  #tip .tip-foot{
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;
+    color:var(--muted);text-transform:uppercase;margin-top:6px;opacity:.7;
+  }
+
   .systems{border-top:1px solid var(--line);margin-top:34px;padding:30px 0 50px}
   .systems h2{
     font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:32px;
@@ -190,6 +301,7 @@
   </div>
   <h1>Five-Man<br><span class="half">Playbook</span></h1>
   <p class="sub">Set executes and strats for the full seven-map pool. Default first, execute second — the calls below are answers to information, not opening moves.</p>
+  <div class="hint">Hover or tap any utility line to see throw → landing on the mini-map</div>
 </header>
 
 <div class="roles" aria-label="Role key">
@@ -217,6 +329,7 @@
   <button role="tab" aria-selected="false" data-map="ancient">Ancient</button>
   <button role="tab" aria-selected="false" data-map="anubis">Anubis</button>
   <button role="tab" aria-selected="false" data-map="cache">Cache<span class="new">NEW</span></button>
+  <button role="tab" aria-selected="false" data-map="economy" class="econ-tab">Economy</button>
 </nav>
 
 <!-- ================= MIRAGE ================= -->
@@ -232,31 +345,31 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>A Split</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Jungle (from top mid)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>CT (from top mid)</li>
-        <li><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Stairs (from ramp)</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over A + IGL flash over connector</li>
-        <li><span class="who">AWP</span><span class="chip molly">MOLLY</span>Sandwich, then <span class="chip hold">HOLD</span> connector</li>
+        <li data-m="mirage" data-f="TOP MID" data-t="JUNGLE" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Jungle (from top mid)</li>
+        <li data-m="mirage" data-f="TOP MID" data-t="CT" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>CT (from top mid)</li>
+        <li data-m="mirage" data-f="A RAMP" data-t="STAIRS" tabindex="0"><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Stairs (from ramp)</li>
+        <li data-m="mirage" data-f="A RAMP" data-t="A SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over A + IGL flash over connector</li>
+        <li data-m="mirage" data-f="A RAMP" data-t="SANDWICH" data-n="Then swings to hold connector" tabindex="0"><span class="who">AWP</span><span class="chip molly">MOLLY</span>Sandwich, then <span class="chip hold">HOLD</span> connector</li>
       </ul>
       <p class="move"><b>Movement</b>E1+LRK ramp → site. E2+IGL connector after flashes. Plant for CT/jungle.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>B Rush Apps</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Bench (window side)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Market door</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Van</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 out of apps, staggered 1s</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid/window for the rotation cross</li>
+        <li data-m="mirage" data-f="APPS" data-t="BENCH" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Bench (window side)</li>
+        <li data-m="mirage" data-f="APPS" data-t="MARKET" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Market door</li>
+        <li data-m="mirage" data-f="APPS" data-t="VAN" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Van</li>
+        <li data-m="mirage" data-f="APPS" data-t="B SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>×2 out of apps, staggered 1s</li>
+        <li data-m="mirage" data-f="MID" data-t="WINDOW" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid/window for the rotation cross</li>
       </ul>
       <p class="move"><b>Movement</b>E1 to short/car, E2 wide to van, IGL+LRK trail. Plant default behind boxes.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Slow A Default</h3>
       <ul class="util">
-        <li><span class="who">TEAM</span>Palace + ramp control by 0:35, one flash each</li>
-        <li><span class="who">LRK</span><span class="chip flash">FLASH</span>+<span class="chip molly">MOLLY</span>B apps bait at 0:30</li>
-        <li><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT + jungle at 0:20</li>
+        <li data-m="mirage" data-f="T SPAWN" data-t="PALACE" tabindex="0"><span class="who">TEAM</span>Palace + ramp control by 0:35, one flash each</li>
+        <li data-m="mirage" data-f="APPS" data-t="B SITE" data-n="Bait only — no push" tabindex="0"><span class="who">LRK</span><span class="chip flash">FLASH</span>+<span class="chip molly">MOLLY</span>B apps bait at 0:30</li>
+        <li data-m="mirage" data-f="A RAMP" data-t="CT" data-n="+ jungle smoke" tabindex="0"><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT + jungle at 0:20</li>
       </ul>
       <p class="move"><b>Movement</b>Single flash over site, walk out. Punishes early rotators off the B bait.</p>
     </div>
@@ -287,30 +400,30 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>A Long + Short Split</h3>
       <ul class="util">
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Long corner (blue container)</li>
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT</li>
-        <li><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Short (goes catwalk via mid)</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over A site from long</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid doors — kills the mid-to-B crosser</li>
+        <li data-m="dust2" data-f="LONG DOORS" data-t="LONG" data-n="Blue container corner" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Long corner (blue container)</li>
+        <li data-m="dust2" data-f="LONG" data-t="CT" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT</li>
+        <li data-m="dust2" data-f="MID" data-t="SHORT" data-n="LRK goes catwalk via mid" tabindex="0"><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Short (goes catwalk via mid)</li>
+        <li data-m="dust2" data-f="LONG" data-t="A SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Over A site from long</li>
+        <li data-m="dust2" data-f="MID" data-t="MID DOORS" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid doors — kills the mid-to-B crosser</li>
       </ul>
       <p class="move"><b>Movement</b>E1+E2 long → site. LRK+IGL up catwalk. Plant for long. AWP joins short late.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>B Tunnels Flood</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B doors/window (mid cut)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Back plat</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Big box / car</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 out of tunnels (IGL throws second)</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid doors</li>
+        <li data-m="dust2" data-f="UPPER TUNS" data-t="B DOORS" data-n="Cuts mid-to-B" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B doors/window (mid cut)</li>
+        <li data-m="dust2" data-f="UPPER TUNS" data-t="BACK PLAT" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Back plat</li>
+        <li data-m="dust2" data-f="UPPER TUNS" data-t="CAR" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Big box / car</li>
+        <li data-m="dust2" data-f="UPPER TUNS" data-t="B SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>×2 out of tunnels (IGL throws second)</li>
+        <li data-m="dust2" data-f="MID" data-t="MID DOORS" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid doors</li>
       </ul>
       <p class="move"><b>Movement</b>E1 wide to car, E2 site, trail in. Plant for tunnels. 2 play off the doors smoke fade.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Mid to B</h3>
       <ul class="util">
-        <li><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT mid doors + xbox at 0:50</li>
-        <li><span class="who">LRK</span><span class="chip hold">HOLD</span>Tunnels flank</li>
+        <li data-m="dust2" data-f="MID" data-t="MID DOORS" data-n="+ xbox smoke at 0:50" tabindex="0"><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT mid doors + xbox at 0:50</li>
+        <li data-m="dust2" data-f="UPPER TUNS" data-t="LOWER TUNS" tabindex="0"><span class="who">LRK</span><span class="chip hold">HOLD</span>Tunnels flank</li>
       </ul>
       <p class="move"><b>Movement</b>Catwalk → lower. Hit B from lower + tunnels simultaneously — anchor gets sandwiched. Use vs passive CTs.</p>
     </div>
@@ -341,30 +454,30 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>A Apps + Short Split</h3>
       <ul class="util">
-        <li><span class="who">LRK</span><span class="chip flash">FLASH</span>Balcony + <span class="chip molly">MOLLY</span> pit (from apps)</li>
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Arch-side + library (from 2nd mid)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>CT</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over short</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the arch rotator</li>
+        <li data-m="inferno" data-f="APPS" data-t="BALCONY" data-n="+ molly pit" tabindex="0"><span class="who">LRK</span><span class="chip flash">FLASH</span>Balcony + <span class="chip molly">MOLLY</span> pit (from apps)</li>
+        <li data-m="inferno" data-f="2ND MID" data-t="ARCH" data-n="+ library smoke" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Arch-side + library (from 2nd mid)</li>
+        <li data-m="inferno" data-f="MID" data-t="CT" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>CT</li>
+        <li data-m="inferno" data-f="MID" data-t="SHORT" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over short</li>
+        <li data-m="inferno" data-f="MID" data-t="ARCH" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the arch rotator</li>
       </ul>
       <p class="move"><b>Movement</b>LRK pressures apps first (draws eyes), then E1+E2 short → site, IGL trails. Molly graveyard on retake sound.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>B Banana Execute</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Coffins</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>New box / sandbags</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over banana, staggered</li>
-        <li><span class="who">AWP</span><span class="chip molly">MOLLY</span>1st oranges, enters 3rd</li>
+        <li data-m="inferno" data-f="BANANA" data-t="CT" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT</li>
+        <li data-m="inferno" data-f="BANANA" data-t="COFFINS" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Coffins</li>
+        <li data-m="inferno" data-f="BANANA" data-t="NEW BOX" data-n="Or sandbags" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>New box / sandbags</li>
+        <li data-m="inferno" data-f="BANANA" data-t="B SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over banana, staggered</li>
+        <li data-m="inferno" data-f="BANANA" data-t="ORANGES" data-n="Enters 3rd" tabindex="0"><span class="who">AWP</span><span class="chip molly">MOLLY</span>1st oranges, enters 3rd</li>
       </ul>
       <p class="move"><b>Movement</b>E1 wide to dark, E2 to new box. Plant for banana. 2 stay in crossfire, 3 fall to banana/spools for the retake.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Fake B → Slow A Apps</h3>
       <ul class="util">
-        <li><span class="who">B PAIR</span><span class="chip molly">MOLLY</span>+<span class="chip flash">FLASH</span>Banana show at 0:40, no push</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Pit + <span class="chip flash">FLASH</span> balcony at 0:25</li>
+        <li data-m="inferno" data-f="BANANA" data-t="B SITE" data-n="Show only — no push" tabindex="0"><span class="who">B PAIR</span><span class="chip molly">MOLLY</span>+<span class="chip flash">FLASH</span>Banana show at 0:40, no push</li>
+        <li data-m="inferno" data-f="APPS" data-t="PIT" data-n="+ balcony flash" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Pit + <span class="chip flash">FLASH</span> balcony at 0:25</li>
       </ul>
       <p class="move"><b>Movement</b>3 through apps, banana pair rotates 2nd mid → short. A 3-stacked B dies to the A sandwich.</p>
     </div>
@@ -395,30 +508,30 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>A Fast — Three-Point Entry</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip molly">MOLLY</span>Ramp delay + <span class="chip smoke">SMOKE</span> hut-to-site</li>
-        <li><span class="who">E2</span><span class="chip flash">FLASH</span>Main + follow flash</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Squeaky, then opens it</li>
-        <li><span class="who">E1</span>First through hut</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Main angle for the heaven peek</li>
+        <li data-m="nuke" data-f="LOBBY" data-t="RAMP" data-n="+ hut-to-site smoke" tabindex="0"><span class="who">IGL</span><span class="chip molly">MOLLY</span>Ramp delay + <span class="chip smoke">SMOKE</span> hut-to-site</li>
+        <li data-m="nuke" data-f="MAIN" data-t="A SITE" tabindex="0"><span class="who">E2</span><span class="chip flash">FLASH</span>Main + follow flash</li>
+        <li data-m="nuke" data-f="LOBBY" data-t="SQUEAKY" data-n="Then opens squeaky" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Squeaky, then opens it</li>
+        <li data-m="nuke" data-f="LOBBY" data-t="HUT" tabindex="0"><span class="who">E1</span>First through hut</li>
+        <li data-m="nuke" data-f="MAIN" data-t="HEAVEN" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Main angle for the heaven peek</li>
       </ul>
       <p class="move"><b>Movement</b>Hut + main + squeaky at once — two CTs can't hold three doors. Plant for main; fall to lobby playing vent sound.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>Outside B — Smoke Wall</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Garage line</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Red line</li>
-        <li><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Silo line</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over secret</li>
-        <li><span class="who">AWP</span><span class="chip molly">MOLLY</span>Garage interior, trails</li>
+        <li data-m="nuke" data-f="OUTSIDE" data-t="GARAGE" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Garage line</li>
+        <li data-m="nuke" data-f="OUTSIDE" data-t="RED" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Red line</li>
+        <li data-m="nuke" data-f="SILO" data-t="OUTSIDE" tabindex="0"><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Silo line</li>
+        <li data-m="nuke" data-f="OUTSIDE" data-t="SECRET" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Over secret</li>
+        <li data-m="nuke" data-f="OUTSIDE" data-t="GARAGE" data-n="Interior, then trails" tabindex="0"><span class="who">AWP</span><span class="chip molly">MOLLY</span>Garage interior, trails</li>
       </ul>
       <p class="move"><b>Movement</b>All five cross behind the wall. E1+E2 secret → B, AWP+LRK garage, IGL flexes. Lives or dies on smoke sync — drill it.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Vents B (Fake A)</h3>
       <ul class="util">
-        <li><span class="who">A PAIR</span><span class="chip flash">FLASH</span>Full hut/main show at 0:35, no entry</li>
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site through squeaky gap</li>
+        <li data-m="nuke" data-f="LOBBY" data-t="HUT" data-n="Show only — no entry" tabindex="0"><span class="who">A PAIR</span><span class="chip flash">FLASH</span>Full hut/main show at 0:35, no entry</li>
+        <li data-m="nuke" data-f="SQUEAKY" data-t="B SITE (LWR)" data-n="Thrown through the squeaky gap" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site through squeaky gap</li>
       </ul>
       <p class="move"><b>Movement</b>3 drop vents while CTs watch A. High risk, brutal payout — once per half maximum.</p>
     </div>
@@ -449,30 +562,30 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>A Split — Main + Donut</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT (from mid)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Temple/elbow — donut stays open as entry path</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Pit (from main)</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over A main + IGL pop from donut</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the rotate</li>
+        <li data-m="ancient" data-f="MID" data-t="CT" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT (from mid)</li>
+        <li data-m="ancient" data-f="MID" data-t="TEMPLE" data-n="Donut stays open as entry path" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Temple/elbow — donut stays open as entry path</li>
+        <li data-m="ancient" data-f="A MAIN" data-t="PIT" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Pit (from main)</li>
+        <li data-m="ancient" data-f="A MAIN" data-t="A SITE" data-n="+ IGL pop from donut" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Over A main + IGL pop from donut</li>
+        <li data-m="ancient" data-f="MID" data-t="TEMPLE" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the rotate</li>
       </ul>
       <p class="move"><b>Movement</b>E1+LRK main → site, E2+IGL through donut. Plant behind box; donut + main post-plant crossfire.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>B Ramp Flood</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Short/CT cut</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Cave-exit line (from long)</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default plant / pillar</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over ramp, staggered with E2</li>
-        <li><span class="who">AWP</span>Clears long with LRK, <span class="chip hold">HOLD</span> cave after</li>
+        <li data-m="ancient" data-f="B RAMP" data-t="SHORT" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Short/CT cut</li>
+        <li data-m="ancient" data-f="LANE" data-t="CAVE" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Cave-exit line (from long)</li>
+        <li data-m="ancient" data-f="B RAMP" data-t="PILLAR" data-n="Or default plant" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default plant / pillar</li>
+        <li data-m="ancient" data-f="B RAMP" data-t="B SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over ramp, staggered with E2</li>
+        <li data-m="ancient" data-f="LANE" data-t="CAVE" data-n="Clears long with LRK first" tabindex="0"><span class="who">AWP</span>Clears long with LRK, <span class="chip hold">HOLD</span> cave after</li>
       </ul>
       <p class="move"><b>Movement</b>E1+IGL ramp, E2+LRK long — pincer. Plant for ramp; pillar + lane crossfire.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Mid to B</h3>
       <ul class="util">
-        <li><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT + short simultaneously at 0:50</li>
-        <li><span class="who">LRK</span><span class="chip hold">HOLD</span>Mid-to-A flank</li>
+        <li data-m="ancient" data-f="MID" data-t="CT" data-n="+ short smoke, simultaneous" tabindex="0"><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT + short simultaneously at 0:50</li>
+        <li data-m="ancient" data-f="MID" data-t="DONUT" tabindex="0"><span class="who">LRK</span><span class="chip hold">HOLD</span>Mid-to-A flank</li>
       </ul>
       <p class="move"><b>Movement</b>Drop into B short with four. The anchor faces a 4-man flood with no help. Use vs mid-passive CTs.</p>
     </div>
@@ -503,30 +616,30 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>B Split — Main + Water</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site CT-line (from main)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Double doors (mid cut)</li>
-        <li><span class="who">LRK</span><span class="chip flash">FLASH</span>Out of water for self + E2</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over B main</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for connector rotators</li>
+        <li data-m="anubis" data-f="B MAIN" data-t="B SITE" data-n="CT-line cut" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site CT-line (from main)</li>
+        <li data-m="anubis" data-f="MID" data-t="DOUBLE DOORS" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Double doors (mid cut)</li>
+        <li data-m="anubis" data-f="WATER" data-t="B SITE" data-n="For self + E2" tabindex="0"><span class="who">LRK</span><span class="chip flash">FLASH</span>Out of water for self + E2</li>
+        <li data-m="anubis" data-f="B MAIN" data-t="B SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Over B main</li>
+        <li data-m="anubis" data-f="MID" data-t="CONNECTOR" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for connector rotators</li>
       </ul>
       <p class="move"><b>Movement</b>E1+IGL main → site, LRK+E2 out of water. Post-plant: 1 water, 1 dark, 2 falling to main/palace.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>A Execute — Main + Con</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT + heaven (both from main — practice these)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Walkway, then takes connector</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default / ninja spot</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over A main</li>
-        <li><span class="who">AWP</span>Enters con behind E2, <span class="chip hold">HOLD</span> heaven fade</li>
+        <li data-m="anubis" data-f="A MAIN" data-t="CT" data-n="+ heaven smoke — practice both" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT + heaven (both from main — practice these)</li>
+        <li data-m="anubis" data-f="CONNECTOR" data-t="WALKWAY" data-n="Then takes connector" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Walkway, then takes connector</li>
+        <li data-m="anubis" data-f="A MAIN" data-t="A SITE" data-n="Default / ninja spot" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default / ninja spot</li>
+        <li data-m="anubis" data-f="A MAIN" data-t="A SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over A main</li>
+        <li data-m="anubis" data-f="CONNECTOR" data-t="HEAVEN" data-n="Enters con behind E2" tabindex="0"><span class="who">AWP</span>Enters con behind E2, <span class="chip hold">HOLD</span> heaven fade</li>
       </ul>
       <p class="move"><b>Movement</b>E1+IGL+LRK main → site, E2+AWP through connector. Watch the heaven smoke fade on post-plant.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Fake A → B Water</h3>
       <ul class="util">
-        <li><span class="who">A PAIR</span><span class="chip smoke">SMOKE</span>+<span class="chip flash">FLASH</span>Full A show at 0:40, 2 bodies at main</li>
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site, thrown on the rotation sound</li>
+        <li data-m="anubis" data-f="A MAIN" data-t="A SITE" data-n="Show only — 2 bodies at main" tabindex="0"><span class="who">A PAIR</span><span class="chip smoke">SMOKE</span>+<span class="chip flash">FLASH</span>Full A show at 0:40, 2 bodies at main</li>
+        <li data-m="anubis" data-f="WATER" data-t="B SITE" data-n="Thrown on the rotation sound" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site, thrown on the rotation sound</li>
       </ul>
       <p class="move"><b>Movement</b>3 through water at 0:25. Anubis rotations are long — this punishes them hard.</p>
     </div>
@@ -559,30 +672,30 @@
     <div class="card">
       <span class="kind">Execute 01</span><h3>A Split — Main + Squeaky</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT / site cross</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Quad</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default / dumpster</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over A main + E2 flash through squeaky</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the rotate</li>
+        <li data-m="cache" data-f="A MAIN" data-t="CT" data-n="Site cross cut" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT / site cross</li>
+        <li data-m="cache" data-f="A MAIN" data-t="QUAD" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Quad</li>
+        <li data-m="cache" data-f="A MAIN" data-t="A SITE" data-n="Default / dumpster" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default / dumpster</li>
+        <li data-m="cache" data-f="A MAIN" data-t="A SITE" data-n="+ E2 flash through squeaky" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>Over A main + E2 flash through squeaky</li>
+        <li data-m="cache" data-f="MID" data-t="GARAGE" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the rotate</li>
       </ul>
       <p class="move"><b>Movement</b>E1+IGL+LRK main → site, E2 through squeaky. Plant for main; quad-side + main crossfire.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 02</span><h3>B Main Execute</h3>
       <ul class="util">
-        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT (heaven/spawn cut)</li>
-        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Site / checkers cut</li>
-        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Close-left corner</li>
-        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over B main, staggered with E2</li>
-        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid/vents for the rotation</li>
+        <li data-m="cache" data-f="B MAIN" data-t="HEAVEN" data-n="Heaven / spawn cut" tabindex="0"><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT (heaven/spawn cut)</li>
+        <li data-m="cache" data-f="B MAIN" data-t="CHECKERS" tabindex="0"><span class="who">E2</span><span class="chip smoke">SMOKE</span>Site / checkers cut</li>
+        <li data-m="cache" data-f="B MAIN" data-t="B SITE" data-n="Close-left corner" tabindex="0"><span class="who">LRK</span><span class="chip molly">MOLLY</span>Close-left corner</li>
+        <li data-m="cache" data-f="B MAIN" data-t="B SITE" tabindex="0"><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over B main, staggered with E2</li>
+        <li data-m="cache" data-f="MID" data-t="VENTS" tabindex="0"><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid/vents for the rotation</li>
       </ul>
       <p class="move"><b>Movement</b>E1 wide, E2 site, trail in. With mid control, send LRK through vents simultaneously — the anchor can't hold main + vents alone.</p>
     </div>
     <div class="card">
       <span class="kind">Execute 03</span><h3>Mid Split Both</h3>
       <ul class="util">
-        <li><span class="who">TEAM</span>Own garage + highway by 0:45</li>
-        <li><span class="who">SPLIT</span>2 vents → B · 3 connector/white box → A, utility on both</li>
+        <li data-m="cache" data-f="MID" data-t="GARAGE" data-n="+ highway, by 0:45" tabindex="0"><span class="who">TEAM</span>Own garage + highway by 0:45</li>
+        <li data-m="cache" data-f="VENTS" data-t="B SITE" data-n="3 go connector/white box → A" tabindex="0"><span class="who">SPLIT</span>2 vents → B · 3 connector/white box → A, utility on both</li>
       </ul>
       <p class="move"><b>Movement</b>A 2-1-2 CT setup breaks completely. Commit to whichever site holds a lone anchor, on IGL's call.</p>
     </div>
@@ -598,6 +711,178 @@
     <li><b>Vents discipline:</b> someone owns vents info every round or B-main hits become unholdable</li>
     <li><b>Cache rewards AWPers</b> — give yours the mid or A-main sightline and keep them alive through rotations</li>
     <li><b>30 min/day on the CS2 version</b> until lineups are muscle memory. Most opponents don't know this map yet — outwork them</li>
+  </ul></div>
+</section>
+
+<!-- ================= ECONOMY ================= -->
+<section class="map" id="economy">
+  <div class="map-head"><h2>Economy</h2><span class="tagline">Money is utility with a delay.</span></div>
+  <p class="econ-intro">The IGL calls every buy for all five. No solo forces, no ninja AWPs on eco. These are the tiers, the decision trees, and the loss-bonus math you need to plan two rounds ahead instead of one.</p>
+
+  <div class="sidelabel ct">Buy Ladder</div>
+  <div class="buyladder">
+    <div class="rung">
+      <span class="price">$0 – $1,500</span>
+      <h4>Full Eco</h4>
+      <ul>
+        <li>Pistol only, <b>no armor, no util</b></li>
+        <li>Save for round after</li>
+        <li>Stack one site, look for a trade kill</li>
+      </ul>
+    </div>
+    <div class="rung">
+      <span class="price">$2,000 – $2,500</span>
+      <h4>Light Buy</h4>
+      <ul>
+        <li>Upgraded pistol (P250/Tec-9/Five-SeveN) + <b>armor</b></li>
+        <li>1 nade if affordable, otherwise smoke-only for exec</li>
+        <li>Coordinated hit — never spread out</li>
+      </ul>
+    </div>
+    <div class="rung">
+      <span class="price">$2,500 – $3,500</span>
+      <h4>Semi-Buy</h4>
+      <ul>
+        <li>SMG or shotgun + armor</li>
+        <li>MP9/MAC-10 for close angles, XM/Nova for A-short types</li>
+        <li>Kill = $600, gun kept — snowballs your eco</li>
+      </ul>
+    </div>
+    <div class="rung">
+      <span class="price">$4,000 – $4,750</span>
+      <h4>Force Buy</h4>
+      <ul>
+        <li>Galil / FAMAS + armor + <b>1–2 nades</b></li>
+        <li>Occasional AK/M4 if two teammates can drop</li>
+        <li>Use when denial > next-round quality</li>
+      </ul>
+    </div>
+    <div class="rung">
+      <span class="price">$5,000+</span>
+      <h4>Full Buy</h4>
+      <ul>
+        <li>AK/M4 + <b>armor + kit (CT) + 2 nades minimum</b></li>
+        <li>AWP if bank supports the whole team</li>
+        <li>Nade priority: smoke → flash → molly → HE</li>
+      </ul>
+    </div>
+    <div class="rung">
+      <span class="price">$16,000</span>
+      <h4>Max Cap</h4>
+      <ul>
+        <li>Money over cap is wasted — <b>drop for a teammate</b></li>
+        <li>AWP drop, rifle drop, extra flashes</li>
+        <li>Check bank at freeze time, not spawn</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidelabel t">Decision Trees</div>
+  <div class="flowgrid">
+    <div class="flow">
+      <span class="kind">Question 01</span>
+      <h3>Full Buy or Save?</h3>
+      <div class="decision">
+        <div class="branch yes"><b>Full buy if</b>All five can afford rifle + armor + 2 nades AND next round you'd still full buy on a loss</div>
+        <div class="branch no"><b>Save if</b>Anyone under $4,500 AND a loss now means broken eco for 2+ rounds</div>
+        <div class="branch"><b>Rule</b>Never buy a "half rifle" round where two players have no util. That's a fake full-buy — worst of both worlds.</div>
+      </div>
+    </div>
+    <div class="flow">
+      <span class="kind">Question 02</span>
+      <h3>Force or Eco?</h3>
+      <div class="decision">
+        <div class="branch yes"><b>Force if</b>Opponent is on a save/light AND you can deny their next full buy by winning this one</div>
+        <div class="branch yes"><b>Force if</b>Score/momentum needs a break — 10–4 down at half deserves a coin-flip round</div>
+        <div class="branch no"><b>Eco if</b>Opponent is on full buy AND your force wouldn't beat their eco next round either</div>
+      </div>
+    </div>
+    <div class="flow">
+      <span class="kind">Question 03</span>
+      <h3>Anti-Eco Buy</h3>
+      <div class="decision">
+        <div class="branch"><b>What</b>Rifle + armor + <b>HE + 1 flash</b>. Drop the smoke — you don't need it vs pistols.</div>
+        <div class="branch"><b>Why</b>HE is the anti-stack tool. Ecos flood one site 5-deep; a well-placed HE deletes the round.</div>
+        <div class="branch"><b>Setup</b>Split 3–2, hold long angles, no peeking corners. Ecos win on close aggressive trades.</div>
+      </div>
+    </div>
+    <div class="flow">
+      <span class="kind">Question 04</span>
+      <h3>Bonus Round (post-pistol win)</h3>
+      <div class="decision">
+        <div class="branch yes"><b>Buy up</b>SMG or Galil/FAMAS + armor + nades. You have ~$4,300 — spend it.</div>
+        <div class="branch"><b>Keep $2k floor</b>Don't buy so much you can't full buy next round on a loss.</div>
+        <div class="branch"><b>AWPer</b>Skip the AWP this round unless bank supports it. Save for round 3.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidelabel t">Loss Bonus Ladder</div>
+  <div class="lossbonus">
+    <h3>How much you earn per consecutive round lost</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Loss #</th><th>Bonus</th><th>What it means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>$1,400</td><td>Still a full save — no util, no armor</td></tr>
+        <tr><td>2</td><td>$1,900</td><td>Light buy possible — armor + pistol upgrade</td></tr>
+        <tr><td>3</td><td>$2,400</td><td>Semi-buy window opens — SMG + armor</td></tr>
+        <tr><td>4</td><td>$2,900</td><td>Force-buy territory — Galil + nades on a save-stacked round</td></tr>
+        <tr><td class="max">5+</td><td class="max">$3,400</td><td class="max">Max bonus — full buy is affordable after 2 saves at this tier</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sidelabel ct">Round-Type Playbook</div>
+  <div class="roundtypes">
+    <div class="rtype">
+      <span class="tag full">FULL</span>
+      <h4>Full Buy</h4>
+      <p>Everyone rifle + armor + 2 nades. Run your named executes. This is the round the playbook was written for.</p>
+      <div class="rule-line">TRIGGER: All five ≥ $4,750</div>
+    </div>
+    <div class="rtype">
+      <span class="tag force">FORCE</span>
+      <h4>Force Buy</h4>
+      <p>Galil/FAMAS + armor + 1 nade. Close angles, no long duels. Deny their next round even if you lose the fight.</p>
+      <div class="rule-line">TRIGGER: Bank $2,900–$4,500 + opponent light</div>
+    </div>
+    <div class="rtype">
+      <span class="tag semi">SEMI</span>
+      <h4>Semi-Buy</h4>
+      <p>SMG + armor + smoke. Snowball round — kills = $600 each. Play for pick-offs, not sites.</p>
+      <div class="rule-line">TRIGGER: Bank $2,500–$3,500 + you can afford to reset</div>
+    </div>
+    <div class="rtype">
+      <span class="tag eco">ECO</span>
+      <h4>Full Save</h4>
+      <p>Pistols only. Stack one site 5-deep, or lurk for a pick + gun. No solo hero peeks — the goal is next round.</p>
+      <div class="rule-line">TRIGGER: Loss now = broken eco next round</div>
+    </div>
+    <div class="rtype">
+      <span class="tag eco">ANTI-ECO</span>
+      <h4>Anti-Eco</h4>
+      <p>Rifle + HE + flash, skip the smoke. Split 3–2, hold long, never peek corners. HE breaks stacks.</p>
+      <div class="rule-line">TRIGGER: You full-buying, opponent on eco</div>
+    </div>
+    <div class="rtype">
+      <span class="tag semi">BONUS</span>
+      <h4>Pistol Bonus</h4>
+      <p>Won pistol → SMG/Galil + armor + nades. Buy up but keep $2k floor. AWPer waits until round 3.</p>
+      <div class="rule-line">TRIGGER: Round 2 or 13, coming off pistol W</div>
+    </div>
+  </div>
+
+  <div class="sidelabel t">IGL Reminders</div>
+  <div class="ct-box"><ul>
+    <li><b>Call buys at freeze time, not spawn.</b> Bank changes with the win/loss you just took.</li>
+    <li><b>Announce the bank ceiling.</b> "Save $2k on wins" tells the team what they can drop for next round.</li>
+    <li><b>Drop discipline:</b> AWPer + entries get first drops. Lurker buys their own gun 90% of the time.</li>
+    <li><b>Half-time reset:</b> everyone starts $10k on side swap — plan rounds 16–17 like a fresh pistol + bonus.</li>
+    <li><b>The 3-round rule:</b> if a lost round would break eco for 3+ rounds, save now even if it looks winnable.</li>
   </ul></div>
 </section>
 
@@ -644,7 +929,10 @@
 <footer>Five-Man Playbook · Active Duty S5 · Trade or die</footer>
 </div>
 
+<div id="tip" role="tooltip" aria-hidden="true"></div>
+
 <script>
+  // ---------- map tabs ----------
   const tabs = document.querySelectorAll('nav.veto button');
   const maps = document.querySelectorAll('section.map');
   tabs.forEach(tab => {
@@ -656,7 +944,6 @@
       window.scrollTo({top: document.querySelector('nav.veto').offsetTop, behavior: 'smooth'});
     });
   });
-  // arrow-key navigation between tabs
   document.querySelector('nav.veto').addEventListener('keydown', e => {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
     const arr = [...tabs];
@@ -664,6 +951,138 @@
     const next = e.key === 'ArrowRight' ? (i + 1) % arr.length : (i - 1 + arr.length) % arr.length;
     arr[next].click(); arr[next].focus();
   });
+
+  // ---------- mini-map zone data (schematic positions, 0–100 grid) ----------
+  const MAPS = {
+    mirage: {
+      "T SPAWN":[50,90],"PALACE":[75,76],"A RAMP":[86,63],"A SITE":[78,45],"SANDWICH":[70,50],
+      "STAIRS":[65,58],"JUNGLE":[62,38],"CT":[53,28],"TOP MID":[45,67],"MID":[45,52],
+      "CONNECTOR":[56,45],"WINDOW":[38,40],"SHORT":[29,46],"UNDERPASS":[34,58],
+      "APPS":[15,68],"B SITE":[20,35],"VAN":[27,28],"BENCH":[12,29],"MARKET":[31,33]
+    },
+    dust2: {
+      "T SPAWN":[50,92],"LONG DOORS":[68,74],"LONG":[79,55],"PIT":[89,44],"A SITE":[75,29],
+      "CT":[57,21],"SHORT":[58,43],"MID":[48,62],"MID DOORS":[45,48],"XBOX":[52,55],
+      "UPPER TUNS":[29,72],"LOWER TUNS":[33,52],"B DOORS":[37,33],"WINDOW":[43,27],
+      "B SITE":[21,30],"BACK PLAT":[13,23],"CAR":[18,38]
+    },
+    inferno: {
+      "T SPAWN":[9,62],"2ND MID":[32,64],"MID":[42,54],"ARCH":[55,49],"LIBRARY":[61,42],
+      "SHORT":[63,56],"APPS":[45,75],"BALCONY":[57,75],"PIT":[64,81],"A SITE":[71,66],
+      "GRAVEYARD":[78,58],"CT":[73,45],"BANANA":[33,32],"SANDBAGS":[41,26],"ORANGES":[35,22],
+      "CAR":[47,18],"B SITE":[56,17],"NEW BOX":[51,23],"COFFINS":[64,14],"DARK":[60,25],"SPOOLS":[27,41]
+    },
+    nuke: {
+      "T SPAWN":[50,92],"LOBBY":[48,77],"MAIN":[39,61],"HUT":[52,63],"SQUEAKY":[64,61],
+      "A SITE":[52,46],"HEAVEN":[44,33],"VENTS":[59,48],"B SITE (LWR)":[68,34],"RAMP":[76,58],
+      "CT":[38,21],"OUTSIDE":[21,58],"SILO":[11,73],"RED":[28,47],"GARAGE":[26,33],"SECRET":[34,19]
+    },
+    ancient: {
+      "T SPAWN":[50,92],"MID":[50,62],"DONUT":[59,47],"A MAIN":[79,71],"A SITE":[73,40],
+      "PIT":[87,46],"TEMPLE":[61,34],"CT":[50,23],"B RAMP":[23,66],"B SITE":[25,36],
+      "SHORT":[38,44],"CAVE":[33,27],"LANE":[14,45],"PILLAR":[30,38]
+    },
+    anubis: {
+      "T SPAWN":[50,92],"MID":[50,62],"DOUBLE DOORS":[46,46],"CONNECTOR":[60,50],"WALKWAY":[66,43],
+      "A MAIN":[77,71],"PALACE":[86,58],"A SITE":[72,34],"HEAVEN":[64,26],"CT":[54,20],
+      "WATER":[35,56],"CANAL":[28,66],"B MAIN":[19,71],"B SITE":[25,32],"UPPER":[37,37],"DARK":[30,23]
+    },
+    cache: {
+      "T SPAWN":[7,50],"A MAIN":[31,26],"SQUEAKY":[54,35],"QUAD":[63,19],"A SITE":[73,24],
+      "TRUCK":[82,31],"HEAVEN":[86,42],"CT":[90,53],"MID":[46,50],"WHITE BOX":[37,52],
+      "GARAGE":[63,50],"HIGHWAY":[33,61],"VENTS":[61,63],"B MAIN":[33,77],"B SITE":[71,77],"CHECKERS":[80,68]
+    }
+  };
+
+  // ---------- tooltip ----------
+  const tip = document.getElementById('tip');
+  const MAP_LABELS = {mirage:'MIRAGE',dust2:'DUST2',inferno:'INFERNO',nuke:'NUKE',ancient:'ANCIENT',anubis:'ANUBIS',cache:'CACHE'};
+  const S = 106, PAD = 3; // svg viewBox size + padding
+  const px = v => PAD + v[0] * (S - 2*PAD) / 100;
+  const py = v => PAD + v[1] * (S - 2*PAD) / 100;
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+  function buildSvg(mapKey, from, to){
+    const zones = MAPS[mapKey];
+    if (!zones || !zones[from] || !zones[to]) return '';
+    let g = '';
+    // faint grid
+    for (let i = 1; i < 4; i++){
+      const p = PAD + i * (S - 2*PAD) / 4;
+      g += `<line x1="${p}" y1="${PAD}" x2="${p}" y2="${S-PAD}" stroke="#1f2a36" stroke-width="0.4"/>`;
+      g += `<line x1="${PAD}" y1="${p}" x2="${S-PAD}" y2="${p}" stroke="#1f2a36" stroke-width="0.4"/>`;
+    }
+    // all zones, faint
+    for (const [name, pos] of Object.entries(zones)){
+      if (name === from || name === to) continue;
+      g += `<circle cx="${px(pos)}" cy="${py(pos)}" r="0.9" fill="#3a4653"/>`;
+      g += `<text x="${px(pos)}" y="${py(pos)-2.2}" font-size="3.4" fill="#5a6672" text-anchor="middle" font-family="JetBrains Mono,monospace">${esc(name)}</text>`;
+    }
+    // path: dashed curve from throw to landing
+    const f = zones[from], t = zones[to];
+    const fx = px(f), fy = py(f), tx = px(t), ty = py(t);
+    const mx = (fx+tx)/2 + (fy-ty)*0.22, my = (fy+ty)/2 + (tx-fx)*0.22;
+    g += `<path d="M ${fx} ${fy} Q ${mx} ${my} ${tx} ${ty}" fill="none" stroke="#e8a33d" stroke-width="0.9" stroke-dasharray="2.4 1.8" opacity="0.9"/>`;
+    // FROM marker: orange dot
+    g += `<circle cx="${fx}" cy="${fy}" r="2.4" fill="#e8a33d"/>`;
+    g += `<circle cx="${fx}" cy="${fy}" r="4" fill="none" stroke="#e8a33d" stroke-width="0.6" opacity="0.5"/>`;
+    g += `<text x="${fx}" y="${fy+7.5}" font-size="4" fill="#e8a33d" text-anchor="middle" font-weight="bold" font-family="JetBrains Mono,monospace">${esc(from)}</text>`;
+    // TO marker: X
+    g += `<line x1="${tx-2.6}" y1="${ty-2.6}" x2="${tx+2.6}" y2="${ty+2.6}" stroke="#f2e6b8" stroke-width="1.3"/>`;
+    g += `<line x1="${tx-2.6}" y1="${ty+2.6}" x2="${tx+2.6}" y2="${ty-2.6}" stroke="#f2e6b8" stroke-width="1.3"/>`;
+    g += `<text x="${tx}" y="${ty-4.5}" font-size="4" fill="#f2e6b8" text-anchor="middle" font-weight="bold" font-family="JetBrains Mono,monospace">${esc(to)}</text>`;
+    return `<svg viewBox="0 0 ${S} ${S}" width="224" height="224" aria-hidden="true">${g}</svg>`;
+  }
+
+  function showTip(li, x, y){
+    const {m, f, t, n} = li.dataset;
+    const svg = buildSvg(m, f, t);
+    if (!svg) return;
+    tip.innerHTML =
+      `<div class="tip-head"><span class="tip-route">${esc(f)} → ${esc(t)}</span><span class="tip-map">${MAP_LABELS[m]}</span></div>` +
+      svg +
+      (n ? `<div class="tip-note">${esc(n)}</div>` : '') +
+      `<div class="tip-foot">Schematic positions — not a lineup guide</div>`;
+    tip.style.display = 'block';
+    tip.setAttribute('aria-hidden','false');
+    positionTip(x, y);
+  }
+  function positionTip(x, y){
+    const r = tip.getBoundingClientRect();
+    let left = x + 16, top = y - r.height / 2;
+    if (left + r.width > window.innerWidth - 8) left = x - r.width - 16;
+    if (left < 8) left = 8;
+    top = Math.max(8, Math.min(top, window.innerHeight - r.height - 8));
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+  function hideTip(){
+    tip.style.display = 'none';
+    tip.setAttribute('aria-hidden','true');
+    tip.innerHTML = '';
+  }
+
+  let pinned = null; // for touch: tapped element stays open
+  document.querySelectorAll('.util li[data-f]').forEach(li => {
+    li.addEventListener('mouseenter', e => { pinned = null; showTip(li, e.clientX, e.clientY); });
+    li.addEventListener('mousemove', e => { if (!pinned) positionTip(e.clientX, e.clientY); });
+    li.addEventListener('mouseleave', () => { if (!pinned) hideTip(); });
+    li.addEventListener('focus', () => {
+      const r = li.getBoundingClientRect();
+      showTip(li, r.right, r.top + r.height / 2);
+    });
+    li.addEventListener('blur', () => { if (!pinned) hideTip(); });
+    li.addEventListener('click', e => {
+      if (pinned === li) { pinned = null; hideTip(); return; }
+      pinned = li;
+      const r = li.getBoundingClientRect();
+      showTip(li, r.right, r.top + r.height / 2);
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', () => { if (pinned) { pinned = null; hideTip(); } });
+  window.addEventListener('scroll', () => { if (!pinned) hideTip(); }, {passive:true});
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') { pinned = null; hideTip(); } });
 </script>
 </body>
 </html>
