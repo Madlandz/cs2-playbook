@@ -342,6 +342,239 @@
   .scrim-log .del:hover{color:var(--molly)}
   .empty-state{color:var(--muted);font-style:italic;padding:12px 0;text-align:center}
 
+  /* ---------- header toolbar ---------- */
+  .toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px}
+  .tool-btn{
+    appearance:none;background:var(--panel);color:var(--text);
+    border:1px solid var(--line);border-radius:4px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;padding:8px 12px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:8px;transition:all .15s;
+  }
+  .tool-btn:hover{border-color:var(--t-orange);color:var(--t-orange)}
+  .tool-btn .ico{font-size:14px;line-height:1}
+  .tool-btn kbd{
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:3px;
+    padding:1px 5px;color:var(--muted);
+  }
+  .tool-btn[aria-pressed="true"]{background:var(--t-orange);color:var(--night);border-color:var(--t-orange)}
+  .tool-btn[aria-pressed="true"] kbd{background:rgba(0,0,0,.15);border-color:rgba(0,0,0,.2);color:var(--night)}
+
+  /* ---------- veto strip (match mode) ---------- */
+  .veto-strip{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:0;
+  }
+  .veto-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+    color:var(--t-orange);text-transform:uppercase;
+  }
+  .veto-picks{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+  .veto-picks label{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--panel);border:1px solid var(--line);border-radius:4px;
+    padding:5px 10px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;
+    font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .veto-picks label:hover{color:var(--text)}
+  .veto-picks input{
+    appearance:none;width:12px;height:12px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:2px;cursor:pointer;
+  }
+  .veto-picks input:checked{background:var(--t-orange);border-color:var(--t-orange)}
+  .veto-picks label:has(input:checked){border-color:var(--t-orange);color:var(--text)}
+  .veto-reset{
+    appearance:none;background:transparent;color:var(--muted);border:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    padding:5px 10px;border-radius:3px;cursor:pointer;text-transform:uppercase;
+  }
+  .veto-reset:hover{color:var(--text);border-color:var(--muted)}
+
+  /* ---------- compact / match mode ---------- */
+  body.compact header .stamp,
+  body.compact header .sub,
+  body.compact header .hint,
+  body.compact .roles,
+  body.compact .rules,
+  body.compact .systems{display:none}
+  body.compact h1{font-size:clamp(28px,4vw,42px);margin:6px 0 2px}
+  body.compact header{padding:20px 0 12px}
+  body.compact nav.veto button{font-size:22px;padding:16px 20px 14px}
+  body.compact .card h3{font-size:26px}
+  body.compact .util li{font-size:15px;padding:4px 4px}
+  body.compact .util .who{font-size:12.5px;min-width:44px}
+  body.compact .chip{font-size:11px;padding:2px 8px 3px}
+  body.compact .move{font-size:15px}
+  body.compact .ct-box li{font-size:15px}
+  body.compact .retake h4{font-size:22px}
+  body.compact .retake p{font-size:14.5px}
+  body.compact nav.veto button.hidden-veto{display:none}
+
+  /* ---------- search modal ---------- */
+  .search-backdrop{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+    display:none;align-items:flex-start;justify-content:center;padding-top:12vh;
+  }
+  .search-backdrop.open{display:flex}
+  .search-modal{
+    background:var(--panel);border:1px solid var(--t-orange);border-radius:8px;
+    width:100%;max-width:600px;box-shadow:0 20px 60px rgba(0,0,0,.7);
+    overflow:hidden;
+  }
+  .search-modal input{
+    width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);
+    color:var(--text);font-family:'Barlow',sans-serif;font-size:16px;padding:16px 18px;outline:none;
+  }
+  .search-modal input::placeholder{color:var(--muted)}
+  .search-results{max-height:50vh;overflow-y:auto}
+  .search-result{
+    display:flex;align-items:baseline;gap:12px;padding:10px 18px;cursor:pointer;
+    border-bottom:1px solid rgba(31,42,54,.5);
+  }
+  .search-result:hover,.search-result.active{background:var(--panel-2)}
+  .search-result.active{border-left:2px solid var(--t-orange);padding-left:16px}
+  .search-result .r-type{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    color:var(--t-orange);text-transform:uppercase;min-width:70px;
+  }
+  .search-result .r-label{color:var(--text);font-size:14px;flex:1}
+  .search-result .r-ctx{color:var(--muted);font-size:12px;font-family:'JetBrains Mono',monospace}
+  .search-empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+  .search-hint{
+    padding:8px 18px;font-family:'JetBrains Mono',monospace;font-size:10px;
+    letter-spacing:.1em;color:var(--muted);text-transform:uppercase;
+    background:var(--panel-2);border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:10px;
+  }
+  .search-hint kbd{
+    background:var(--panel);border:1px solid var(--line);border-radius:3px;
+    padding:1px 6px;color:var(--text);
+  }
+  .search-hilite{color:var(--flash);font-weight:600}
+
+  /* ---------- live tracker ---------- */
+  .live-tab .live-dot{
+    display:inline-block;width:8px;height:8px;background:var(--molly);border-radius:50%;
+    margin-right:8px;vertical-align:middle;animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  .live-setup{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:20px}
+  .live-setup .field{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px}
+  .live-setup label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    color:var(--muted);text-transform:uppercase;display:block;margin-bottom:6px;
+  }
+  .side-toggle{display:flex;gap:0}
+  .side-toggle button{
+    flex:1;appearance:none;background:var(--panel-2);color:var(--muted);
+    border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:12px;
+    letter-spacing:.1em;padding:8px;cursor:pointer;text-transform:uppercase;
+  }
+  .side-toggle button:first-child{border-radius:4px 0 0 4px}
+  .side-toggle button:last-child{border-radius:0 4px 4px 0}
+  .side-toggle button.active[data-side="T"]{background:var(--t-orange);color:var(--night);border-color:var(--t-orange)}
+  .side-toggle button.active[data-side="CT"]{background:var(--ct-blue);color:var(--night);border-color:var(--ct-blue)}
+
+  .scoreboard{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;margin-bottom:16px;
+  }
+  .score-side{text-align:center}
+  .score-side .who{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:4px;
+  }
+  .score-side .num{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:56px;line-height:.9;
+  }
+  .score-side.us .num{color:var(--t-orange)}
+  .score-side.them .num{color:var(--ct-blue)}
+  .score-side .side-badge{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    color:var(--muted);text-transform:uppercase;margin-top:4px;
+  }
+  .score-divider{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:36px;color:var(--line);
+  }
+
+  .round-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .round-btn{
+    appearance:none;color:var(--night);border:none;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;font-weight:700;padding:20px;border-radius:var(--radius);cursor:pointer;
+  }
+  .round-btn.us{background:var(--t-orange)}
+  .round-btn.us:hover{background:var(--flash)}
+  .round-btn.them{background:var(--ct-blue)}
+  .round-btn.them:hover{background:#8cc4ec}
+
+  .econ-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:20px}
+  .econ-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+  .econ-panel h4{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  .econ-panel.us h4{color:var(--t-orange)}
+  .econ-panel.them h4{color:var(--ct-blue)}
+  .econ-panel .stat-row{display:flex;justify-content:space-between;font-size:13px;padding:3px 0}
+  .econ-panel .stat-row .k{color:var(--muted);font-size:12px}
+  .econ-panel .stat-row .v{color:var(--text);font-family:'JetBrains Mono',monospace}
+  .econ-panel .stat-row .v.good{color:#a3b56a}
+  .econ-panel .stat-row .v.warn{color:var(--flash)}
+  .econ-panel .stat-row .v.bad{color:var(--molly)}
+  .rec-box{
+    background:var(--panel);border:1px solid var(--t-orange);border-radius:var(--radius);
+    padding:12px 16px;margin-bottom:16px;
+  }
+  .rec-box .rec-label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--t-orange);text-transform:uppercase;
+  }
+  .rec-box .rec-text{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:22px;
+    text-transform:uppercase;color:var(--text);margin-top:3px;
+  }
+  .rec-box .rec-detail{font-size:13px;color:var(--muted);margin-top:2px}
+
+  .round-log{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 16px;margin-bottom:16px;
+  }
+  .round-log h4{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:10px;
+  }
+  .round-grid{display:flex;gap:4px;flex-wrap:wrap}
+  .round-cell{
+    width:24px;height:24px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+    background:var(--panel-2);border:1px solid var(--line);color:var(--muted);position:relative;
+  }
+  .round-cell.us{background:var(--t-orange);color:var(--night);border-color:var(--t-orange)}
+  .round-cell.them{background:var(--ct-blue);color:var(--night);border-color:var(--ct-blue)}
+  .round-cell.half-break{margin-left:10px;border-left:2px solid var(--line);padding-left:6px;width:auto;background:transparent;border:none;color:var(--muted)}
+
+  .live-controls{display:flex;gap:8px;flex-wrap:wrap}
+  .live-controls button{
+    appearance:none;background:transparent;color:var(--muted);
+    border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:.1em;padding:8px 14px;border-radius:4px;cursor:pointer;text-transform:uppercase;
+  }
+  .live-controls button:hover{color:var(--text);border-color:var(--muted)}
+  .live-controls .danger:hover{color:var(--molly);border-color:var(--molly)}
+
+  /* ---------- export/import buttons ---------- */
+  .io-btn{
+    appearance:none;background:transparent;color:var(--ct-blue);border:1px solid var(--ct-blue);
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;padding:6px 10px;border-radius:4px;cursor:pointer;
+  }
+  .io-btn:hover{background:var(--ct-blue);color:var(--night)}
+
   section.map{display:none;padding:30px 0 10px}
   section.map.active{display:block}
   .map-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
@@ -450,6 +683,10 @@
 <div class="wrap">
 
 <header>
+  <div class="toolbar">
+    <button class="tool-btn" id="btn-search" aria-label="Search"><span class="ico">⌕</span> Search <kbd>⌘K</kbd></button>
+    <button class="tool-btn" id="btn-compact" aria-pressed="false"><span class="ico">◪</span> Match Mode</button>
+  </div>
   <div class="stamp">
     <span>ACTIVE DUTY · PREMIER SEASON 5</span>
     <span class="live">CACHE IN — OVERPASS OUT · EFFECTIVE JUL 6 2026</span>
@@ -458,6 +695,12 @@
   <p class="sub">Set executes and strats for the full seven-map pool. Default first, execute second — the calls below are answers to information, not opening moves.</p>
   <div class="hint">Hover or tap any utility line to see throw → landing on the mini-map</div>
 </header>
+
+<div class="veto-strip" id="veto-strip" hidden>
+  <span class="veto-label">Maps in play:</span>
+  <div class="veto-picks" id="veto-picks"></div>
+  <button class="veto-reset" id="veto-reset">Show all</button>
+</div>
 
 <div class="roles" aria-label="Role key">
   <div class="role"><b>IGL</b> in-game leader · mid-round calls</div>
@@ -485,6 +728,7 @@
   <button role="tab" aria-selected="false" data-map="anubis">Anubis</button>
   <button role="tab" aria-selected="false" data-map="cache">Cache<span class="new">NEW</span></button>
   <button role="tab" aria-selected="false" data-map="economy" class="econ-tab">Economy</button>
+  <button role="tab" aria-selected="false" data-map="live" class="econ-tab live-tab"><span class="live-dot"></span>Live</button>
   <button role="tab" aria-selected="false" data-map="timing" class="econ-tab">Timing</button>
   <button role="tab" aria-selected="false" data-map="comms" class="econ-tab">Comms</button>
   <button role="tab" aria-selected="false" data-map="scouting" class="econ-tab">Scouting</button>
@@ -1160,6 +1404,84 @@
   </ul></div>
 </section>
 
+<!-- ================= LIVE ================= -->
+<section class="map" id="live">
+  <div class="map-head"><h2>Live</h2><span class="tagline">Round-by-round call log for match day.</span></div>
+  <p class="econ-intro">Click <b>US</b> or <b>THEM</b> after every round. The tracker follows loss streaks, projects next-round buys, and calls out force windows before you burn a save.</p>
+
+  <div class="live-setup">
+    <div class="field">
+      <label>1st Half Side</label>
+      <div class="side-toggle" id="side-toggle">
+        <button data-side="T" class="active">T</button>
+        <button data-side="CT">CT</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Map</label>
+      <select id="live-map">
+        <option>Mirage</option><option>Dust2</option><option>Inferno</option>
+        <option>Nuke</option><option>Ancient</option><option>Anubis</option><option>Cache</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Opponent</label>
+      <input type="text" id="live-opp" placeholder="Team tag">
+    </div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="score-side us">
+      <div class="who">US</div>
+      <div class="num" id="us-score">0</div>
+      <div class="side-badge" id="us-side">T · 1st Half</div>
+    </div>
+    <div class="score-divider">·</div>
+    <div class="score-side them">
+      <div class="who">THEM</div>
+      <div class="num" id="them-score">0</div>
+      <div class="side-badge" id="them-side">CT · 1st Half</div>
+    </div>
+  </div>
+
+  <div class="round-actions">
+    <button class="round-btn us" id="win-us">Round to Us</button>
+    <button class="round-btn them" id="win-them">Round to Them</button>
+  </div>
+
+  <div class="rec-box">
+    <div class="rec-label">Next-Round Recommendation</div>
+    <div class="rec-text" id="rec-text">Full buy</div>
+    <div class="rec-detail" id="rec-detail">Round 1 · pistol</div>
+  </div>
+
+  <div class="econ-stats">
+    <div class="econ-panel us">
+      <h4>Us</h4>
+      <div class="stat-row"><span class="k">Loss streak</span><span class="v" id="us-streak">0</span></div>
+      <div class="stat-row"><span class="k">Bonus if we lose</span><span class="v" id="us-bonus">$1,400</span></div>
+      <div class="stat-row"><span class="k">Est. bank next round</span><span class="v" id="us-bank">$800</span></div>
+    </div>
+    <div class="econ-panel them">
+      <h4>Them</h4>
+      <div class="stat-row"><span class="k">Loss streak</span><span class="v" id="them-streak">0</span></div>
+      <div class="stat-row"><span class="k">Bonus if they lose</span><span class="v" id="them-bonus">$1,400</span></div>
+      <div class="stat-row"><span class="k">Est. bank next round</span><span class="v" id="them-bank">$800</span></div>
+    </div>
+  </div>
+
+  <div class="round-log">
+    <h4>Round Log</h4>
+    <div class="round-grid" id="round-grid"><span class="empty-state">No rounds logged.</span></div>
+  </div>
+
+  <div class="live-controls">
+    <button id="undo-round">Undo Last</button>
+    <button id="end-half">End Half → Switch Sides</button>
+    <button id="reset-match" class="danger">Reset Match</button>
+  </div>
+</section>
+
 <!-- ================= TIMING ================= -->
 <section class="map" id="timing">
   <div class="map-head"><h2>Timing</h2><span class="tagline">What should be happening at every mark.</span></div>
@@ -1283,6 +1605,9 @@
     <label for="scout-team">Opponent tag</label>
     <input type="text" id="scout-team" placeholder="e.g. Team Liquid, ryzeUp, PUG lobby #3">
     <button class="save-btn" id="scout-save">Save All</button>
+    <button class="io-btn" id="scout-export">Export</button>
+    <button class="io-btn" id="scout-import-btn">Import</button>
+    <input type="file" id="scout-import" accept="application/json" hidden>
     <button class="clear-btn" id="scout-clear">Clear All Notes</button>
   </div>
 
@@ -1331,7 +1656,14 @@
 
   <div class="sidelabel t">Scrim Log</div>
   <div class="scrim-log">
-    <h3>Recent Sessions</h3>
+    <h3 style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <span>Recent Sessions</span>
+      <span style="display:flex;gap:6px">
+        <button class="io-btn" id="track-export">Export</button>
+        <button class="io-btn" id="track-import-btn">Import</button>
+        <input type="file" id="track-import" accept="application/json" hidden>
+      </span>
+    </h3>
     <div id="scrim-table"></div>
   </div>
 </section>
@@ -1380,6 +1712,18 @@
 </div>
 
 <div id="tip" role="tooltip" aria-hidden="true"></div>
+
+<div class="search-backdrop" id="search-backdrop" role="dialog" aria-label="Search">
+  <div class="search-modal">
+    <input type="text" id="search-input" placeholder="Search executes, maps, vocab, utility…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+    <div class="search-hint">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+      <span><kbd>↵</kbd> Open</span>
+      <span><kbd>Esc</kbd> Close</span>
+    </div>
+  </div>
+</div>
 
 <script>
   // ---------- map tabs ----------
@@ -1676,6 +2020,447 @@
     cb.checked = LS.get(key, false);
     cb.addEventListener('change', () => LS.set(key, cb.checked));
   });
+
+  // ==========================================================
+  // ---------- MATCH MODE (compact + veto filter) ----------
+  // ==========================================================
+  const body = document.body;
+  const btnCompact = document.getElementById('btn-compact');
+  const vetoStrip = document.getElementById('veto-strip');
+  const vetoPicks = document.getElementById('veto-picks');
+  const vetoReset = document.getElementById('veto-reset');
+  const MAP_TABS = ['mirage','dust2','inferno','nuke','ancient','anubis','cache'];
+
+  function applyCompact(on){
+    body.classList.toggle('compact', on);
+    btnCompact.setAttribute('aria-pressed', on ? 'true' : 'false');
+    vetoStrip.hidden = !on;
+    LS.set('cs2pb.compact', on);
+    if (on) renderVeto();
+  }
+  function renderVeto(){
+    const picks = LS.get('cs2pb.veto', {});
+    vetoPicks.innerHTML = MAP_TABS.map(m => {
+      const label = m.charAt(0).toUpperCase() + m.slice(1);
+      const checked = picks[m] ? 'checked' : '';
+      return `<label><input type="checkbox" data-m="${m}" ${checked}>${label}</label>`;
+    }).join('');
+    vetoPicks.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('change', () => {
+        const p = LS.get('cs2pb.veto', {});
+        p[inp.dataset.m] = inp.checked;
+        LS.set('cs2pb.veto', p);
+        filterTabs();
+      });
+    });
+    filterTabs();
+  }
+  function filterTabs(){
+    const picks = LS.get('cs2pb.veto', {});
+    const anyPicked = Object.values(picks).some(v => v);
+    document.querySelectorAll('nav.veto button[data-map]').forEach(btn => {
+      const m = btn.dataset.map;
+      const isMap = MAP_TABS.includes(m);
+      const shouldHide = body.classList.contains('compact') && isMap && anyPicked && !picks[m];
+      btn.classList.toggle('hidden-veto', shouldHide);
+    });
+  }
+  vetoReset.addEventListener('click', () => {
+    LS.set('cs2pb.veto', {});
+    renderVeto();
+  });
+  btnCompact.addEventListener('click', () => applyCompact(!body.classList.contains('compact')));
+  if (LS.get('cs2pb.compact', false)) applyCompact(true);
+
+  // ==========================================================
+  // ---------- SEARCH (Ctrl/Cmd-K) ----------
+  // ==========================================================
+  const backdrop = document.getElementById('search-backdrop');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const btnSearch = document.getElementById('btn-search');
+  let searchIndex = [];
+  let selectedIdx = 0;
+
+  function buildIndex(){
+    searchIndex = [];
+    // maps + tabs
+    document.querySelectorAll('nav.veto button[data-map]').forEach(btn => {
+      searchIndex.push({
+        type: 'tab', label: btn.textContent.replace('NEW','').trim(),
+        ctx: '', tab: btn.dataset.map, targetSel: null
+      });
+    });
+    // executes / cards
+    document.querySelectorAll('section.map .card h3').forEach(h3 => {
+      const mapId = h3.closest('section.map').id;
+      const mapName = mapId.charAt(0).toUpperCase() + mapId.slice(1);
+      searchIndex.push({
+        type: 'execute', label: h3.textContent.trim(),
+        ctx: mapName, tab: mapId, targetSel: h3
+      });
+    });
+    // retakes
+    document.querySelectorAll('section.map .retake h4').forEach(h4 => {
+      const mapId = h4.closest('section.map').id;
+      const mapName = mapId.charAt(0).toUpperCase() + mapId.slice(1);
+      const site = h4.parentElement.querySelector('.site-tag')?.textContent || '';
+      searchIndex.push({
+        type: 'retake', label: h4.textContent.trim(),
+        ctx: mapName + ' · ' + site, tab: mapId, targetSel: h4
+      });
+    });
+    // buy tiers
+    document.querySelectorAll('#economy .rung h4').forEach(h4 => {
+      const price = h4.parentElement.querySelector('.price')?.textContent || '';
+      searchIndex.push({
+        type: 'buy', label: h4.textContent.trim(),
+        ctx: 'Economy · ' + price, tab: 'economy', targetSel: h4
+      });
+    });
+    // timing marks
+    document.querySelectorAll('#timing .tick h4').forEach(h4 => {
+      const t = h4.parentElement.querySelector('.time')?.textContent || '';
+      searchIndex.push({
+        type: 'timing', label: h4.textContent.trim(),
+        ctx: 'Timing · ' + t, tab: 'timing', targetSel: h4
+      });
+    });
+    // vocab
+    document.querySelectorAll('#comms .term dt').forEach(dt => {
+      searchIndex.push({
+        type: 'vocab', label: dt.textContent.trim(),
+        ctx: 'Comms', tab: 'comms', targetSel: dt
+      });
+    });
+    // utility lines (search-only, no direct target)
+    document.querySelectorAll('section.map .util li[data-f]').forEach(li => {
+      const mapId = li.closest('section.map').id;
+      const mapName = mapId.charAt(0).toUpperCase() + mapId.slice(1);
+      const cardName = li.closest('.card')?.querySelector('h3')?.textContent.trim() || '';
+      const from = li.dataset.f, to = li.dataset.t;
+      searchIndex.push({
+        type: 'util', label: from + ' → ' + to,
+        ctx: mapName + ' · ' + cardName, tab: mapId, targetSel: li
+      });
+    });
+  }
+  function scoreMatch(text, q){
+    const t = text.toLowerCase(), s = q.toLowerCase();
+    if (t === s) return 100;
+    if (t.startsWith(s)) return 80;
+    if (t.includes(' ' + s)) return 60;
+    if (t.includes(s)) return 40;
+    // fuzzy: all chars in order
+    let i = 0;
+    for (const c of t){ if (c === s[i]) i++; if (i >= s.length) break; }
+    return i === s.length ? 10 : 0;
+  }
+  function hilite(text, q){
+    if (!q) return esc(text);
+    const s = q.toLowerCase(), t = text;
+    const idx = t.toLowerCase().indexOf(s);
+    if (idx < 0) return esc(text);
+    return esc(t.slice(0, idx)) + '<span class="search-hilite">' + esc(t.slice(idx, idx + s.length)) + '</span>' + esc(t.slice(idx + s.length));
+  }
+  function renderResults(q){
+    if (!q){
+      searchResults.innerHTML = '<div class="search-empty">Type to search executes, maps, utility, vocab…</div>';
+      return;
+    }
+    const scored = searchIndex
+      .map(item => ({...item, score: Math.max(scoreMatch(item.label, q), scoreMatch(item.ctx, q) * 0.6)}))
+      .filter(x => x.score > 0)
+      .sort((a,b) => b.score - a.score)
+      .slice(0, 8);
+    if (!scored.length){
+      searchResults.innerHTML = '<div class="search-empty">No matches.</div>';
+      return;
+    }
+    selectedIdx = 0;
+    searchResults.innerHTML = scored.map((r, i) =>
+      `<div class="search-result ${i===0?'active':''}" data-i="${i}">
+        <span class="r-type">${r.type}</span>
+        <span class="r-label">${hilite(r.label, q)}</span>
+        <span class="r-ctx">${esc(r.ctx)}</span>
+      </div>`
+    ).join('');
+    // store current results for keyboard nav
+    searchResults._items = scored;
+    searchResults.querySelectorAll('.search-result').forEach(el => {
+      el.addEventListener('click', () => openResult(scored[+el.dataset.i]));
+      el.addEventListener('mouseenter', () => {
+        selectedIdx = +el.dataset.i;
+        searchResults.querySelectorAll('.search-result').forEach((n, j) => n.classList.toggle('active', j === selectedIdx));
+      });
+    });
+  }
+  function openResult(r){
+    closeSearch();
+    // switch tab
+    const btn = document.querySelector(`nav.veto button[data-map="${r.tab}"]`);
+    if (btn) btn.click();
+    // scroll to target
+    if (r.targetSel){
+      setTimeout(() => {
+        r.targetSel.scrollIntoView({behavior:'smooth', block:'center'});
+        // temporary highlight
+        const orig = r.targetSel.style.transition;
+        const origBg = r.targetSel.style.backgroundColor;
+        r.targetSel.style.transition = 'background-color .3s';
+        r.targetSel.style.backgroundColor = 'rgba(232,163,61,.25)';
+        setTimeout(() => {
+          r.targetSel.style.backgroundColor = origBg;
+          setTimeout(() => { r.targetSel.style.transition = orig; }, 400);
+        }, 900);
+      }, 100);
+    }
+  }
+  function openSearch(){
+    buildIndex();
+    backdrop.classList.add('open');
+    searchInput.value = '';
+    renderResults('');
+    setTimeout(() => searchInput.focus(), 30);
+  }
+  function closeSearch(){ backdrop.classList.remove('open'); }
+  btnSearch.addEventListener('click', openSearch);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeSearch(); });
+  searchInput.addEventListener('input', () => renderResults(searchInput.value.trim()));
+  searchInput.addEventListener('keydown', e => {
+    const items = searchResults._items || [];
+    if (e.key === 'ArrowDown'){ e.preventDefault(); selectedIdx = Math.min(items.length-1, selectedIdx+1); }
+    else if (e.key === 'ArrowUp'){ e.preventDefault(); selectedIdx = Math.max(0, selectedIdx-1); }
+    else if (e.key === 'Enter'){ e.preventDefault(); if (items[selectedIdx]) openResult(items[selectedIdx]); return; }
+    else if (e.key === 'Escape'){ closeSearch(); return; }
+    else return;
+    searchResults.querySelectorAll('.search-result').forEach((n, j) => {
+      n.classList.toggle('active', j === selectedIdx);
+      if (j === selectedIdx) n.scrollIntoView({block:'nearest'});
+    });
+  });
+  window.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){
+      e.preventDefault();
+      backdrop.classList.contains('open') ? closeSearch() : openSearch();
+    }
+  });
+
+  // ==========================================================
+  // ---------- EXPORT / IMPORT ----------
+  // ==========================================================
+  function download(name, obj){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function readFile(input, cb){
+    const f = input.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { try { cb(JSON.parse(r.result)); } catch { alert('Not a valid JSON file.'); } };
+    r.readAsText(f);
+    input.value = '';
+  }
+  // scouting export/import
+  document.getElementById('scout-export').addEventListener('click', () => {
+    const team = scoutTeam.value.trim() || 'default';
+    const data = LS.get(scoutKey(), {});
+    if (!Object.keys(data).length){ alert('Nothing saved for "' + team + '" yet.'); return; }
+    download(`cs2pb-scouting-${team.replace(/[^a-z0-9]/gi,'_')}.json`, {team, notes: data, exportedAt: new Date().toISOString()});
+  });
+  document.getElementById('scout-import-btn').addEventListener('click', () => document.getElementById('scout-import').click());
+  document.getElementById('scout-import').addEventListener('change', e => readFile(e.target, obj => {
+    if (!obj || !obj.notes){ alert('Not a scouting export file.'); return; }
+    const team = obj.team || prompt('Save under what team name?', 'imported') || 'imported';
+    scoutTeam.value = team;
+    LS.set('cs2pb.scout.currentTeam', team);
+    LS.set('cs2pb.scout.' + team, obj.notes);
+    renderScout();
+    alert('Imported scouting for "' + team + '".');
+  }));
+  // tracker export/import
+  document.getElementById('track-export').addEventListener('click', () => {
+    download('cs2pb-tracker.json', {
+      roster: loadRoster(),
+      scrims: loadScrims(),
+      exportedAt: new Date().toISOString()
+    });
+  });
+  document.getElementById('track-import-btn').addEventListener('click', () => document.getElementById('track-import').click());
+  document.getElementById('track-import').addEventListener('change', e => readFile(e.target, obj => {
+    if (!obj || !obj.scrims){ alert('Not a tracker export file.'); return; }
+    if (!confirm('Replace current roster and scrim log with imported data?')) return;
+    if (obj.roster) saveRoster(obj.roster);
+    saveScrims(obj.scrims);
+    renderRoster(); renderStatFields(); renderScrims();
+    alert('Imported ' + obj.scrims.length + ' scrims.');
+  }));
+
+  // ==========================================================
+  // ---------- LIVE ROUND TRACKER ----------
+  // ==========================================================
+  const LOSS_LADDER = [1400, 1900, 2400, 2900, 3400];
+  const WIN_REWARD = 3250;
+  const KILL_AVG = 600;
+  const STARTING_BANK = 800;
+
+  function defaultMatch(){
+    return { firstSide: 'T', map: 'Mirage', opp: '', rounds: [], bank: {us: STARTING_BANK, them: STARTING_BANK} };
+  }
+  function loadMatch(){ return LS.get('cs2pb.match', defaultMatch()); }
+  function saveMatch(m){ LS.set('cs2pb.match', m); }
+  function fmt$(n){ return '$' + n.toLocaleString(); }
+
+  function currentSide(m, forUs){
+    const half = m.rounds.length < 12 ? 1 : 2;
+    const first = forUs ? m.firstSide : (m.firstSide === 'T' ? 'CT' : 'T');
+    return half === 1 ? first : (first === 'T' ? 'CT' : 'T');
+  }
+  function calcStreak(rounds, forUs){
+    // count consecutive losses at end of round list for the given side
+    let s = 0;
+    for (let i = rounds.length - 1; i >= 0; i--){
+      const won = forUs ? (rounds[i].winner === 'us') : (rounds[i].winner === 'them');
+      if (won) break;
+      s++;
+    }
+    return Math.min(s, 5);
+  }
+  function nextBonus(streak){ return LOSS_LADDER[Math.min(streak, 4)]; }
+
+  function recomputeBank(m){
+    // rough model: start $800, each round add either win reward or loss bonus + rough kill money
+    let us = STARTING_BANK, them = STARTING_BANK;
+    let usLossStreak = 0, themLossStreak = 0;
+    for (const r of m.rounds){
+      const usWon = r.winner === 'us';
+      if (usWon){
+        us += WIN_REWARD + KILL_AVG * 3; // ~3 avg kills per round for winners
+        them += LOSS_LADDER[Math.min(themLossStreak, 4)] + KILL_AVG;
+        usLossStreak = 0; themLossStreak++;
+      } else {
+        them += WIN_REWARD + KILL_AVG * 3;
+        us += LOSS_LADDER[Math.min(usLossStreak, 4)] + KILL_AVG;
+        themLossStreak = 0; usLossStreak++;
+      }
+      // rough spend: assume $4000 per round buy on average
+      us = Math.max(0, Math.min(16000, us - 4000));
+      them = Math.max(0, Math.min(16000, them - 4000));
+    }
+    // half-time reset
+    if (m.rounds.length === 12){ us = 10000; them = 10000; }
+    return {us, them, usLossStreak, themLossStreak};
+  }
+  function buyRecommendation(bank, streak){
+    if (bank >= 5000) return {text: 'Full Buy', detail: 'Rifle + armor + 2 nades for all five'};
+    if (bank >= 4000) return {text: 'Full Buy (tight)', detail: 'Drop coordination — AWPer + entries first'};
+    if (bank >= 2900 && streak >= 2) return {text: 'Force Buy', detail: 'Deny their next full buy — Galil + nades'};
+    if (bank >= 2500) return {text: 'Semi-Buy', detail: 'SMG + armor + smoke — snowball round'};
+    if (bank >= 2000) return {text: 'Light Buy', detail: 'Upgraded pistol + armor'};
+    return {text: 'Full Save', detail: 'Stack one site with pistols'};
+  }
+
+  function renderLive(){
+    const m = loadMatch();
+    const usScore = m.rounds.filter(r => r.winner === 'us').length;
+    const themScore = m.rounds.filter(r => r.winner === 'them').length;
+    document.getElementById('us-score').textContent = usScore;
+    document.getElementById('them-score').textContent = themScore;
+    const half = m.rounds.length < 12 ? '1st Half' : (m.rounds.length < 24 ? '2nd Half' : 'OT');
+    document.getElementById('us-side').textContent = currentSide(m, true) + ' · ' + half;
+    document.getElementById('them-side').textContent = currentSide(m, false) + ' · ' + half;
+
+    const {us, them, usLossStreak, themLossStreak} = recomputeBank(m);
+    document.getElementById('us-streak').textContent = usLossStreak;
+    document.getElementById('us-bonus').textContent = fmt$(nextBonus(usLossStreak));
+    document.getElementById('us-bank').textContent = fmt$(us);
+    document.getElementById('them-streak').textContent = themLossStreak;
+    document.getElementById('them-bonus').textContent = fmt$(nextBonus(themLossStreak));
+    document.getElementById('them-bank').textContent = fmt$(them);
+
+    // color streak
+    const usStreakEl = document.getElementById('us-streak');
+    usStreakEl.className = 'v ' + (usLossStreak >= 3 ? 'warn' : usLossStreak >= 4 ? 'bad' : '');
+
+    // recommendation
+    const roundNum = m.rounds.length + 1;
+    let rec;
+    if (roundNum === 1 || roundNum === 13){
+      rec = {text: 'Pistol Round', detail: 'No armor calls — full util is $200 kevlar off, don\'t buy'};
+    } else if (roundNum === 2 || roundNum === 14){
+      const wonPistol = m.rounds[m.rounds.length-1]?.winner === 'us';
+      rec = wonPistol
+        ? {text: 'Bonus Buy', detail: 'SMG/Galil + armor + nades, keep $2k floor, AWP waits'}
+        : {text: 'Anti-Eco Buy', detail: 'Rifle + HE + flash, skip smoke. Split 3-2, hold long angles'};
+    } else {
+      rec = buyRecommendation(us, usLossStreak);
+    }
+    document.getElementById('rec-text').textContent = rec.text;
+    document.getElementById('rec-detail').textContent = `Round ${roundNum} · ` + rec.detail;
+
+    // round grid
+    const grid = document.getElementById('round-grid');
+    if (!m.rounds.length){
+      grid.innerHTML = '<span class="empty-state">No rounds logged.</span>';
+    } else {
+      grid.innerHTML = m.rounds.map((r, i) => {
+        const cls = r.winner === 'us' ? 'us' : 'them';
+        const label = r.winner === 'us' ? 'W' : 'L';
+        const breakBefore = i === 12 ? '<span class="round-cell half-break">HALF</span>' : '';
+        return breakBefore + `<span class="round-cell ${cls}" title="Round ${i+1}: ${r.winner==='us'?'Us':'Them'}">${label}</span>`;
+      }).join('');
+    }
+  }
+
+  // side toggle
+  document.querySelectorAll('#side-toggle button').forEach(b => {
+    b.addEventListener('click', () => {
+      const m = loadMatch();
+      m.firstSide = b.dataset.side;
+      saveMatch(m);
+      document.querySelectorAll('#side-toggle button').forEach(x => x.classList.toggle('active', x === b));
+      renderLive();
+    });
+  });
+  // sync side toggle to stored state
+  {
+    const m = loadMatch();
+    document.querySelectorAll('#side-toggle button').forEach(x => x.classList.toggle('active', x.dataset.side === m.firstSide));
+    document.getElementById('live-map').value = m.map || 'Mirage';
+    document.getElementById('live-opp').value = m.opp || '';
+  }
+  document.getElementById('live-map').addEventListener('change', e => {
+    const m = loadMatch(); m.map = e.target.value; saveMatch(m);
+  });
+  document.getElementById('live-opp').addEventListener('input', e => {
+    const m = loadMatch(); m.opp = e.target.value; saveMatch(m);
+  });
+
+  document.getElementById('win-us').addEventListener('click', () => {
+    const m = loadMatch(); m.rounds.push({winner:'us'}); saveMatch(m); renderLive();
+  });
+  document.getElementById('win-them').addEventListener('click', () => {
+    const m = loadMatch(); m.rounds.push({winner:'them'}); saveMatch(m); renderLive();
+  });
+  document.getElementById('undo-round').addEventListener('click', () => {
+    const m = loadMatch(); m.rounds.pop(); saveMatch(m); renderLive();
+  });
+  document.getElementById('end-half').addEventListener('click', () => {
+    const m = loadMatch();
+    // pad rounds to 12 if fewer (rare but keeps math clean)
+    while (m.rounds.length < 12) m.rounds.push({winner: 'them', padded: true});
+    saveMatch(m); renderLive();
+    alert('Half ended. You are now on ' + currentSide(m, true) + ' side.');
+  });
+  document.getElementById('reset-match').addEventListener('click', () => {
+    if (!confirm('Reset the current match?')) return;
+    const m = loadMatch();
+    saveMatch({...defaultMatch(), firstSide: m.firstSide, map: m.map, opp: m.opp});
+    renderLive();
+  });
+  renderLive();
 </script>
 </body>
 </html>
