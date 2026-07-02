@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five-Man Playbook — CS2 Season 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0b0f14;
+    --panel:#121922;
+    --panel-2:#0f151d;
+    --line:#1f2a36;
+    --text:#d9e1e8;
+    --muted:#7c8894;
+    --t-orange:#e8a33d;
+    --ct-blue:#5ca8e8;
+    --smoke:#9aa7b2;
+    --flash:#f2e6b8;
+    --molly:#e05548;
+    --he:#a3b56a;
+    --radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+  body{
+    background:var(--night);
+    color:var(--text);
+    font-family:'Barlow',sans-serif;
+    font-size:15px;
+    line-height:1.55;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      linear-gradient(transparent 31px, rgba(92,168,232,.035) 32px),
+      linear-gradient(90deg, transparent 31px, rgba(92,168,232,.035) 32px);
+    background-size:32px 32px;
+    pointer-events:none;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px;position:relative}
+
+  /* ---------- header ---------- */
+  header{padding:44px 0 26px;border-bottom:1px solid var(--line)}
+  .stamp{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+    color:var(--muted);text-transform:uppercase;display:flex;gap:14px;flex-wrap:wrap;
+  }
+  .stamp .live{color:var(--t-orange)}
+  h1{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;
+    font-size:clamp(44px,7vw,74px);line-height:.95;letter-spacing:.01em;
+    text-transform:uppercase;margin:12px 0 6px;
+  }
+  h1 .half{color:var(--ct-blue)}
+  .sub{color:var(--muted);max-width:560px}
+
+  /* ---------- roles ---------- */
+  .roles{display:flex;gap:8px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--line)}
+  .role{
+    display:flex;align-items:baseline;gap:8px;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:8px 12px;font-size:13px;color:var(--muted);
+  }
+  .role b{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);letter-spacing:.08em}
+
+  /* ---------- rules ---------- */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:22px 0 30px}
+  .rule{background:var(--panel-2);padding:14px 16px;font-size:13.5px;color:var(--muted)}
+  .rule b{color:var(--text);display:block;font-weight:600;margin-bottom:2px}
+
+  /* ---------- map tabs ---------- */
+  nav.veto{
+    position:sticky;top:0;z-index:10;
+    background:rgba(11,15,20,.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    display:flex;gap:2px;overflow-x:auto;
+    margin:0 -20px;padding:0 20px;
+  }
+  nav.veto button{
+    appearance:none;background:none;border:none;cursor:pointer;
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:19px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    padding:14px 16px 12px;border-bottom:2px solid transparent;white-space:nowrap;
+    transition:color .15s;
+  }
+  nav.veto button:hover{color:var(--text)}
+  nav.veto button:focus-visible{outline:2px solid var(--ct-blue);outline-offset:-2px}
+  nav.veto button[aria-selected="true"]{color:var(--t-orange);border-bottom-color:var(--t-orange)}
+  nav.veto button .new{
+    font-family:'JetBrains Mono',monospace;font-size:9px;vertical-align:super;
+    color:var(--ct-blue);letter-spacing:.1em;margin-left:3px;
+  }
+
+  /* ---------- map panels ---------- */
+  section.map{display:none;padding:30px 0 10px}
+  section.map.active{display:block}
+  .map-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .map-head h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:42px;
+    text-transform:uppercase;letter-spacing:.02em;
+  }
+  .map-head .tagline{color:var(--muted);font-size:14px}
+
+  .sidelabel{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:10px;
+  }
+  .sidelabel::after{content:"";flex:1;height:1px;background:var(--line)}
+  .sidelabel.t{color:var(--t-orange)}
+  .sidelabel.ct{color:var(--ct-blue)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--t-orange);
+    border-radius:var(--radius);padding:16px 16px 14px;
+  }
+  .card.wide{grid-column:1 / -1}
+  .card h3{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:22px;
+    text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;
+  }
+  .card .kind{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--muted);text-transform:uppercase;
+  }
+  .util{list-style:none;margin:12px 0 10px;display:flex;flex-direction:column;gap:6px}
+  .util li{display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--muted)}
+  .util .who{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);
+    min-width:34px;letter-spacing:.06em;
+  }
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    padding:1px 7px 2px;border-radius:3px;border:1px solid;white-space:nowrap;
+  }
+  .chip.smoke{color:var(--smoke);border-color:var(--smoke)}
+  .chip.flash{color:var(--flash);border-color:var(--flash)}
+  .chip.molly{color:var(--molly);border-color:var(--molly)}
+  .chip.hold{color:var(--ct-blue);border-color:var(--ct-blue)}
+  .move{font-size:13.5px;border-top:1px dashed var(--line);padding-top:10px;color:var(--text)}
+  .move b{color:var(--t-orange);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:2px}
+
+  .ct-box{
+    background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--ct-blue);
+    border-radius:var(--radius);padding:16px;
+  }
+  .ct-box ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .ct-box li{font-size:13.5px;color:var(--muted);padding-left:16px;position:relative}
+  .ct-box li::before{content:"▸";position:absolute;left:0;color:var(--ct-blue)}
+  .ct-box li b{color:var(--text);font-weight:600}
+
+  .note{
+    background:rgba(232,163,61,.07);border:1px solid rgba(232,163,61,.35);
+    border-radius:var(--radius);padding:12px 16px;font-size:13.5px;color:var(--text);margin-bottom:6px;
+  }
+  .note b{color:var(--t-orange)}
+
+  /* ---------- systems footer ---------- */
+  .systems{border-top:1px solid var(--line);margin-top:34px;padding:30px 0 50px}
+  .systems h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:32px;
+    text-transform:uppercase;margin-bottom:18px;
+  }
+  .sysgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .sys{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+  .sys h3{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--t-orange);margin-bottom:10px;
+  }
+  .sys ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sys li{font-size:13.5px;color:var(--muted);padding-left:14px;position:relative}
+  .sys li::before{content:"·";position:absolute;left:2px;color:var(--t-orange)}
+  .sys li b{color:var(--text)}
+  footer{border-top:1px solid var(--line);padding:16px 0 40px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  @media(max-width:640px){ .role{padding:6px 9px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="stamp">
+    <span>ACTIVE DUTY · PREMIER SEASON 5</span>
+    <span class="live">CACHE IN — OVERPASS OUT · EFFECTIVE JUL 6 2026</span>
+  </div>
+  <h1>Five-Man<br><span class="half">Playbook</span></h1>
+  <p class="sub">Set executes and strats for the full seven-map pool. Default first, execute second — the calls below are answers to information, not opening moves.</p>
+</header>
+
+<div class="roles" aria-label="Role key">
+  <div class="role"><b>IGL</b> in-game leader · mid-round calls</div>
+  <div class="role"><b>E1</b> entry · first through smokes</div>
+  <div class="role"><b>E2</b> second entry · trades every fight</div>
+  <div class="role"><b>AWP</b> opening picks · holds rotations</div>
+  <div class="role"><b>LRK</b> lurker · cuts rotations, delays</div>
+</div>
+
+<div class="rules">
+  <div class="rule"><b>Trade or die</b>No solo fights on an execute. E2 shoulders E1 through every choke.</div>
+  <div class="rule"><b>One call, three seconds</b>All utility lands within 3s of "GO." Bodies move on the last flash.</div>
+  <div class="rule"><b>Default until 0:45</b>Spread, gather info, then answer with an execute.</div>
+  <div class="rule"><b>Keep two post-plant smokes</b>Usually LRK + IGL hold theirs through the hit.</div>
+  <div class="rule"><b>Anti-eco: split 3–2</b>Never five in one choke. Plant fast, play crossfires.</div>
+  <div class="rule"><b>Post-plant default</b>2 site · 1 close cover · 2 on the retake path. Never 5 on site.</div>
+</div>
+
+<nav class="veto" role="tablist" aria-label="Map selection">
+  <button role="tab" aria-selected="true" data-map="mirage">Mirage</button>
+  <button role="tab" aria-selected="false" data-map="dust2">Dust2</button>
+  <button role="tab" aria-selected="false" data-map="inferno">Inferno</button>
+  <button role="tab" aria-selected="false" data-map="nuke">Nuke</button>
+  <button role="tab" aria-selected="false" data-map="ancient">Ancient</button>
+  <button role="tab" aria-selected="false" data-map="anubis">Anubis</button>
+  <button role="tab" aria-selected="false" data-map="cache">Cache<span class="new">NEW</span></button>
+</nav>
+
+<!-- ================= MIRAGE ================= -->
+<section class="map active" id="mirage">
+  <div class="map-head"><h2>Mirage</h2><span class="tagline">Win connector, win the map.</span></div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Spread</h3>
+      <p class="move">E1+E2 top mid / underpass · AWP palace-ramp pick · IGL+LRK B apps presence. Read CT utility, call the execute at ~0:45.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>A Split</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Jungle (from top mid)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>CT (from top mid)</li>
+        <li><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Stairs (from ramp)</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over A + IGL flash over connector</li>
+        <li><span class="who">AWP</span><span class="chip molly">MOLLY</span>Sandwich, then <span class="chip hold">HOLD</span> connector</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+LRK ramp → site. E2+IGL connector after flashes. Plant for CT/jungle.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>B Rush Apps</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Bench (window side)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Market door</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Van</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 out of apps, staggered 1s</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid/window for the rotation cross</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1 to short/car, E2 wide to van, IGL+LRK trail. Plant default behind boxes.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Slow A Default</h3>
+      <ul class="util">
+        <li><span class="who">TEAM</span>Palace + ramp control by 0:35, one flash each</li>
+        <li><span class="who">LRK</span><span class="chip flash">FLASH</span>+<span class="chip molly">MOLLY</span>B apps bait at 0:30</li>
+        <li><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT + jungle at 0:20</li>
+      </ul>
+      <p class="move"><b>Movement</b>Single flash over site, walk out. Punishes early rotators off the B bait.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>B Apps Flood</h3>
+      <p class="move">All five apps. One smoke bench, two flashes over, plant fast. Post-plant: 2 site / spread van, short, apps.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2A (site + jungle) · 1 mid window AWP · 2B (site + apps/market)</li>
+    <li><b>Retake A:</b> CT smoke means regroup connector + jungle, hit together with two flashes</li>
+    <li><b>Force rounds:</b> stack B with 3, upgraded pistols, double-molly apps</li>
+  </ul></div>
+</section>
+
+<!-- ================= DUST2 ================= -->
+<section class="map" id="dust2">
+  <div class="map-head"><h2>Dust2</h2><span class="tagline">Long control decides your half.</span></div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Long Control</h3>
+      <p class="move">E1+E2 take long (flash + car molly) · AWP mid-doors pick · IGL+LRK upper tunnels. Long free → A execute. Contested hard → B split.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>A Long + Short Split</h3>
+      <ul class="util">
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Long corner (blue container)</li>
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT</li>
+        <li><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Short (goes catwalk via mid)</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over A site from long</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid doors — kills the mid-to-B crosser</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+E2 long → site. LRK+IGL up catwalk. Plant for long. AWP joins short late.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>B Tunnels Flood</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B doors/window (mid cut)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Back plat</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Big box / car</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 out of tunnels (IGL throws second)</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid doors</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1 wide to car, E2 site, trail in. Plant for tunnels. 2 play off the doors smoke fade.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Mid to B</h3>
+      <ul class="util">
+        <li><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT mid doors + xbox at 0:50</li>
+        <li><span class="who">LRK</span><span class="chip hold">HOLD</span>Tunnels flank</li>
+      </ul>
+      <p class="move"><b>Movement</b>Catwalk → lower. Hit B from lower + tunnels simultaneously — anchor gets sandwiched. Use vs passive CTs.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>Long Rush</h3>
+      <p class="move">Flash over long corner, all five long, smoke CT cross, plant long-side. Classic for a reason.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2 long (pit + corner) · 1 mid AWP at doors · 2 B (site + tunnels watch)</li>
+    <li><b>Mid AWPer is the rotation engine</b> — never let them die for free</li>
+    <li><b>Retakes:</b> A from CT + short together · B from window + doors with full utility</li>
+  </ul></div>
+</section>
+
+<!-- ================= INFERNO ================= -->
+<section class="map" id="inferno">
+  <div class="map-head"><h2>Inferno</h2><span class="tagline">Rounds are won at 0:30, not 1:50.</span></div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Map Control</h3>
+      <p class="move">E1+E2 banana control (car molly + flash) · LRK apps presence · IGL+AWP mid, AWP holds arch pick. Take banana + apps, then decide.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>A Apps + Short Split</h3>
+      <ul class="util">
+        <li><span class="who">LRK</span><span class="chip flash">FLASH</span>Balcony + <span class="chip molly">MOLLY</span> pit (from apps)</li>
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Arch-side + library (from 2nd mid)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>CT</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over short</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the arch rotator</li>
+      </ul>
+      <p class="move"><b>Movement</b>LRK pressures apps first (draws eyes), then E1+E2 short → site, IGL trails. Molly graveyard on retake sound.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>B Banana Execute</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Coffins</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>New box / sandbags</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over banana, staggered</li>
+        <li><span class="who">AWP</span><span class="chip molly">MOLLY</span>1st oranges, enters 3rd</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1 wide to dark, E2 to new box. Plant for banana. 2 stay in crossfire, 3 fall to banana/spools for the retake.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Fake B → Slow A Apps</h3>
+      <ul class="util">
+        <li><span class="who">B PAIR</span><span class="chip molly">MOLLY</span>+<span class="chip flash">FLASH</span>Banana show at 0:40, no push</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Pit + <span class="chip flash">FLASH</span> balcony at 0:25</li>
+      </ul>
+      <p class="move"><b>Movement</b>3 through apps, banana pair rotates 2nd mid → short. A 3-stacked B dies to the A sandwich.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>B Rush</h3>
+      <p class="move">Full five banana at freeze-time end. Flash over car, flash over sandbags. Speed beats the CT molly if you're clean.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2 B (site + car/coffins) · 1 arch (IGL) · 2 A (pit + site/apps)</li>
+    <li><b>B anchors survive 20 seconds</b> — you're not winning 1v5. Molly banana at 0:40 whenever affordable</li>
+    <li><b>Retake B:</b> regroup CT + arch, smoke banana, hit with double flash</li>
+  </ul></div>
+</section>
+
+<!-- ================= NUKE ================= -->
+<section class="map" id="nuke">
+  <div class="map-head"><h2>Nuke</h2><span class="tagline">Patience. Win outside or ramp first.</span></div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Outside Presence</h3>
+      <p class="move">E1+E2 threaten the outside cross · AWP main/squeaky presence · IGL+LRK lobby, reading hut/vent sounds. Commit only after control.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>A Fast — Three-Point Entry</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip molly">MOLLY</span>Ramp delay + <span class="chip smoke">SMOKE</span> hut-to-site</li>
+        <li><span class="who">E2</span><span class="chip flash">FLASH</span>Main + follow flash</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Squeaky, then opens it</li>
+        <li><span class="who">E1</span>First through hut</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Main angle for the heaven peek</li>
+      </ul>
+      <p class="move"><b>Movement</b>Hut + main + squeaky at once — two CTs can't hold three doors. Plant for main; fall to lobby playing vent sound.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>Outside B — Smoke Wall</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Garage line</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Red line</li>
+        <li><span class="who">LRK</span><span class="chip smoke">SMOKE</span>Silo line</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over secret</li>
+        <li><span class="who">AWP</span><span class="chip molly">MOLLY</span>Garage interior, trails</li>
+      </ul>
+      <p class="move"><b>Movement</b>All five cross behind the wall. E1+E2 secret → B, AWP+LRK garage, IGL flexes. Lives or dies on smoke sync — drill it.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Vents B (Fake A)</h3>
+      <ul class="util">
+        <li><span class="who">A PAIR</span><span class="chip flash">FLASH</span>Full hut/main show at 0:35, no entry</li>
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site through squeaky gap</li>
+      </ul>
+      <p class="move"><b>Movement</b>3 drop vents while CTs watch A. High risk, brutal payout — once per half maximum.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>Ramp Rush</h3>
+      <p class="move">Five lobby → ramp. Two flashes over, molly top of ramp behind you to cut the retake. Plant B, hold ramp + secret.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2 outside (garage + secret watch) · 1 ramp anchor · 2 A (site + heaven flex)</li>
+    <li><b>Ramp player never dry-dies</b> — molly, fall to B, retake with your team alive</li>
+    <li><b>Rotate through heaven/hell,</b> not outside, when outside is smoked</li>
+  </ul></div>
+</section>
+
+<!-- ================= ANCIENT ================= -->
+<section class="map" id="ancient">
+  <div class="map-head"><h2>Ancient</h2><span class="tagline">The map collapses around mid.</span></div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Mid Squeeze</h3>
+      <p class="move">E1+E2+IGL take mid (flash over) · AWP A-main pick · LRK B-ramp presence, no push. Own mid and both sites are split-able.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>A Split — Main + Donut</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT (from mid)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Temple/elbow — donut stays open as entry path</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Pit (from main)</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over A main + IGL pop from donut</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the rotate</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+LRK main → site, E2+IGL through donut. Plant behind box; donut + main post-plant crossfire.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>B Ramp Flood</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>Short/CT cut</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Cave-exit line (from long)</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default plant / pillar</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over ramp, staggered with E2</li>
+        <li><span class="who">AWP</span>Clears long with LRK, <span class="chip hold">HOLD</span> cave after</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+IGL ramp, E2+LRK long — pincer. Plant for ramp; pillar + lane crossfire.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Mid to B</h3>
+      <ul class="util">
+        <li><span class="who">IGL/E2</span><span class="chip smoke">SMOKE</span>CT + short simultaneously at 0:50</li>
+        <li><span class="who">LRK</span><span class="chip hold">HOLD</span>Mid-to-A flank</li>
+      </ul>
+      <p class="move"><b>Movement</b>Drop into B short with four. The anchor faces a 4-man flood with no help. Use vs mid-passive CTs.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>B Ramp</h3>
+      <p class="move">Five ramp, one smoke short, two flashes over. Plant for ramp, spread long/cave/site.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2 A (site + donut watch) · 1 mid · 2 B (site + short flex)</li>
+    <li><b>Mid player is a tripwire, not a hero</b> — announce and fall back</li>
+    <li><b>Molly ramp + main at 0:40</b> every gun round. Ancient CT-side is a utility war</li>
+  </ul></div>
+</section>
+
+<!-- ================= ANUBIS ================= -->
+<section class="map" id="anubis">
+  <div class="map-head"><h2>Anubis</h2><span class="tagline">Water control opens everything.</span></div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Water + Mid</h3>
+      <p class="move">E1+E2 mid toward connector/window · LRK silent in water/canal · IGL+AWP A-main presence, AWP holds walkway pick.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>B Split — Main + Water</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site CT-line (from main)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Double doors (mid cut)</li>
+        <li><span class="who">LRK</span><span class="chip flash">FLASH</span>Out of water for self + E2</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over B main</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for connector rotators</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+IGL main → site, LRK+E2 out of water. Post-plant: 1 water, 1 dark, 2 falling to main/palace.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>A Execute — Main + Con</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT + heaven (both from main — practice these)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Walkway, then takes connector</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default / ninja spot</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Pop over A main</li>
+        <li><span class="who">AWP</span>Enters con behind E2, <span class="chip hold">HOLD</span> heaven fade</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+IGL+LRK main → site, E2+AWP through connector. Watch the heaven smoke fade on post-plant.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Fake A → B Water</h3>
+      <ul class="util">
+        <li><span class="who">A PAIR</span><span class="chip smoke">SMOKE</span>+<span class="chip flash">FLASH</span>Full A show at 0:40, 2 bodies at main</li>
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>B site, thrown on the rotation sound</li>
+      </ul>
+      <p class="move"><b>Movement</b>3 through water at 0:25. Anubis rotations are long — this punishes them hard.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>Mid Rush → A Con</h3>
+      <p class="move">Five mid, smoke double doors, flood connector into A with one flash. Fast plant, spread con/site/main.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2 A (site + main watch) · 1 mid-connector · 2 B (site + water watch)</li>
+    <li><b>Water is the blind spot</b> — utility or info-check it every round at 0:40</li>
+    <li><b>Retakes:</b> A from CT + heaven together · B from CT + upper with a water cut-off molly</li>
+  </ul></div>
+</section>
+
+<!-- ================= CACHE ================= -->
+<section class="map" id="cache">
+  <div class="map-head"><h2>Cache</h2><span class="tagline">Mid is the whole map. So is the prep gap.</span></div>
+
+  <div class="note"><b>Rebuild warning:</b> the CS2 version has revised geometry and sightlines versus CS:GO. These plays are structural — verify every smoke and flash lineup in an offline server before match day. Legacy lineups will not all transfer.</div>
+
+  <div class="sidelabel t">T-Side</div>
+  <div class="cards">
+    <div class="card wide">
+      <span class="kind">Default</span><h3>Mid Pressure</h3>
+      <p class="move">E1+E2 mid control (smoke garage line, boost checks) · AWP+IGL A-main pick toward squeaky/quad · LRK silent at B main. Garage/vents control opens either site or a double split.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 01</span><h3>A Split — Main + Squeaky</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT / site cross</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Quad</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Default / dumpster</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>Over A main + E2 flash through squeaky</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid for the rotate</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1+IGL+LRK main → site, E2 through squeaky. Plant for main; quad-side + main crossfire.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 02</span><h3>B Main Execute</h3>
+      <ul class="util">
+        <li><span class="who">IGL</span><span class="chip smoke">SMOKE</span>CT (heaven/spawn cut)</li>
+        <li><span class="who">E2</span><span class="chip smoke">SMOKE</span>Site / checkers cut</li>
+        <li><span class="who">LRK</span><span class="chip molly">MOLLY</span>Close-left corner</li>
+        <li><span class="who">E1</span><span class="chip flash">FLASH</span>×2 over B main, staggered with E2</li>
+        <li><span class="who">AWP</span><span class="chip hold">HOLD</span>Mid/vents for the rotation</li>
+      </ul>
+      <p class="move"><b>Movement</b>E1 wide, E2 site, trail in. With mid control, send LRK through vents simultaneously — the anchor can't hold main + vents alone.</p>
+    </div>
+    <div class="card">
+      <span class="kind">Execute 03</span><h3>Mid Split Both</h3>
+      <ul class="util">
+        <li><span class="who">TEAM</span>Own garage + highway by 0:45</li>
+        <li><span class="who">SPLIT</span>2 vents → B · 3 connector/white box → A, utility on both</li>
+      </ul>
+      <p class="move"><b>Movement</b>A 2-1-2 CT setup breaks completely. Commit to whichever site holds a lone anchor, on IGL's call.</p>
+    </div>
+    <div class="card wide">
+      <span class="kind">Pistol</span><h3>B Rush</h3>
+      <p class="move">Five B main, one flash over, one smoke site-cross. Plant fast: 2 site / 1 vents / 2 main.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT-Side · Quick Reference</div>
+  <div class="ct-box"><ul>
+    <li><b>Setup:</b> 2 A (site + quad/truck flex) · 1 mid (garage/white box) · 2 B (site + vents watch)</li>
+    <li><b>Vents discipline:</b> someone owns vents info every round or B-main hits become unholdable</li>
+    <li><b>Cache rewards AWPers</b> — give yours the mid or A-main sightline and keep them alive through rotations</li>
+    <li><b>30 min/day on the CS2 version</b> until lineups are muscle memory. Most opponents don't know this map yet — outwork them</li>
+  </ul></div>
+</section>
+
+<!-- ================= SYSTEMS ================= -->
+<div class="systems">
+  <h2>Team Systems</h2>
+  <div class="sysgrid">
+    <div class="sys">
+      <h3>Veto — 7-Map Pool</h3>
+      <ul>
+        <li>Ban your worst map instantly</li>
+        <li><b>Cache is the exploit window</b> — grind it now and pick it for the next 4–8 weeks while opponents' prep is thin</li>
+        <li>Keep 3 genuine picks. Two-map teams die in BO3s</li>
+      </ul>
+    </div>
+    <div class="sys">
+      <h3>Reset Calls</h3>
+      <ul>
+        <li><b>"Reset"</b> — back to spread default, no utility, gather info</li>
+        <li><b>"Slow"</b> — 4-man site hold on CT, save utility for retake</li>
+        <li>3 lost T-rounds in a row → pause, change <b>which side of the map</b> you pressure, not just the strat name</li>
+      </ul>
+    </div>
+    <div class="sys">
+      <h3>Economy</h3>
+      <ul>
+        <li>Full buy = everyone gets rifle + armor + 2 nades minimum, or full eco</li>
+        <li><b>No solo force-buys.</b> IGL calls buys for all five</li>
+        <li>Bonus round after pistol win: buy up, keep a $2k floor where possible</li>
+      </ul>
+    </div>
+    <div class="sys">
+      <h3>Practice — Weekly Split</h3>
+      <ul>
+        <li>2× execute timing drills — dry-run utility until sync is under 3s</li>
+        <li>2× scrims — run every execute at least once</li>
+        <li>1× Cache-only session until it's a pick</li>
+        <li>Demo review 30 min post-scrim — <b>lost gun rounds only</b></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>Five-Man Playbook · Active Duty S5 · Trade or die</footer>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('nav.veto button');
+  const maps = document.querySelectorAll('section.map');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      maps.forEach(m => m.classList.remove('active'));
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.dataset.map).classList.add('active');
+      window.scrollTo({top: document.querySelector('nav.veto').offsetTop, behavior: 'smooth'});
+    });
+  });
+  // arrow-key navigation between tabs
+  document.querySelector('nav.veto').addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const arr = [...tabs];
+    const i = arr.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    const next = e.key === 'ArrowRight' ? (i + 1) % arr.length : (i - 1 + arr.length) % arr.length;
+    arr[next].click(); arr[next].focus();
+  });
+</script>
+</body>
+</html>
