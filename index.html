@@ -187,6 +187,161 @@
     letter-spacing:.05em;padding-top:6px;border-top:1px dashed var(--line);margin-top:4px;
   }
 
+  /* ---------- retake blocks (per map) ---------- */
+  .retakes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  @media(max-width:640px){.retakes{grid-template-columns:1fr}}
+  .retake{
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ct-blue);
+    border-radius:var(--radius);padding:14px 16px;
+  }
+  .retake .site-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+    color:var(--ct-blue);text-transform:uppercase;
+  }
+  .retake h4{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:20px;
+    text-transform:uppercase;letter-spacing:.03em;margin:2px 0 8px;
+  }
+  .retake p{font-size:13px;color:var(--muted);margin-bottom:5px}
+  .retake p b{color:var(--text)}
+
+  /* ---------- timeline ---------- */
+  .timeline{position:relative;padding:20px 0 30px;margin:20px 0}
+  .timeline::before{
+    content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--t-orange) 0%,var(--flash) 50%,var(--molly) 100%);
+    border-radius:1px;
+  }
+  .tick{position:relative;padding:0 0 26px 60px;color:var(--muted)}
+  .tick:last-child{padding-bottom:0}
+  .tick::before{
+    content:"";position:absolute;left:17px;top:6px;width:16px;height:16px;
+    background:var(--night);border:2px solid var(--t-orange);border-radius:50%;
+  }
+  .tick .time{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;
+    color:var(--t-orange);text-transform:uppercase;
+  }
+  .tick h4{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:22px;
+    text-transform:uppercase;letter-spacing:.03em;color:var(--text);margin:2px 0 6px;
+  }
+  .tick p{font-size:13.5px;color:var(--muted);margin-bottom:4px}
+  .tick p b{color:var(--text)}
+  .tick.crit::before{border-color:var(--molly)}
+  .tick.crit .time{color:var(--molly)}
+
+  /* ---------- comms vocab ---------- */
+  .vocab{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;margin-bottom:22px;
+  }
+  .term{background:var(--panel);padding:12px 16px}
+  .term dt{
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;
+    color:var(--t-orange);text-transform:uppercase;font-weight:600;
+  }
+  .term dd{font-size:13px;color:var(--muted);margin-top:3px}
+
+  .script{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px;margin-bottom:14px;font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;line-height:1.7;color:var(--text);
+  }
+  .script .line{display:block;padding:2px 0}
+  .script .lead{color:var(--t-orange);margin-right:8px}
+  .script .self{color:var(--ct-blue)}
+  .script .muted{color:var(--muted)}
+
+  .checklist{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+  .checklist h4{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+    color:var(--t-orange);text-transform:uppercase;margin-bottom:10px;
+  }
+  .checklist label{
+    display:block;padding:6px 0 6px 26px;position:relative;
+    font-size:13.5px;color:var(--muted);cursor:pointer;user-select:none;
+  }
+  .checklist input[type="checkbox"]{
+    position:absolute;left:0;top:8px;width:16px;height:16px;
+    appearance:none;background:var(--panel-2);border:1px solid var(--line);
+    border-radius:3px;cursor:pointer;
+  }
+  .checklist input[type="checkbox"]:checked{background:var(--t-orange);border-color:var(--t-orange)}
+  .checklist input[type="checkbox"]:checked::after{
+    content:"✓";position:absolute;left:2px;top:-3px;color:var(--night);font-weight:900;font-size:14px;
+  }
+  .checklist input[type="checkbox"]:checked + span{color:var(--text);text-decoration:line-through;text-decoration-color:var(--muted)}
+
+  /* ---------- scouting ---------- */
+  .scout-controls{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+  .scout-controls label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;
+    color:var(--muted);text-transform:uppercase;
+  }
+  input[type="text"], textarea, select{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:4px;
+    color:var(--text);font-family:'Barlow',sans-serif;font-size:13.5px;padding:8px 10px;
+  }
+  input[type="text"]:focus, textarea:focus, select:focus{outline:none;border-color:var(--ct-blue)}
+  input[type="text"]{min-width:200px}
+  textarea{width:100%;min-height:80px;font-family:'JetBrains Mono',monospace;font-size:12.5px;resize:vertical}
+  .scout-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+  .scout-card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ct-blue);border-radius:var(--radius);padding:14px 16px}
+  .scout-card h4{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:600;font-size:22px;
+    text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;
+  }
+  .save-btn, .add-btn{
+    appearance:none;background:var(--t-orange);color:var(--night);border:none;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;font-weight:600;padding:8px 14px;border-radius:4px;cursor:pointer;
+  }
+  .save-btn:hover, .add-btn:hover{background:var(--flash)}
+  .save-btn.saved{background:#a3b56a}
+  .clear-btn{
+    appearance:none;background:transparent;color:var(--molly);border:1px solid var(--molly);
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;padding:6px 10px;border-radius:4px;cursor:pointer;
+  }
+  .clear-btn:hover{background:var(--molly);color:var(--night)}
+
+  /* ---------- tracker ---------- */
+  .roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:18px}
+  .roster .slot{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:10px}
+  .roster .slot label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;
+  }
+  .roster .slot input{width:100%}
+  .scrim-form{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:18px}
+  .scrim-form .row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-bottom:12px}
+  @media(max-width:640px){.scrim-form .row{grid-template-columns:1fr}}
+  .scrim-form .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px}
+  .scrim-form .stats label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+    color:var(--muted);text-transform:uppercase;display:block;margin-bottom:3px;
+  }
+  .scrim-form .stats input{width:100%}
+  .scrim-log{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;overflow-x:auto}
+  .scrim-log h3{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+    color:var(--t-orange);text-transform:uppercase;margin-bottom:12px;
+  }
+  .scrim-log table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+  .scrim-log th,.scrim-log td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  .scrim-log th{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    color:var(--muted);text-transform:uppercase;font-weight:400;
+  }
+  .scrim-log td{color:var(--text)}
+  .scrim-log .win{color:#a3b56a}
+  .scrim-log .loss{color:var(--molly)}
+  .scrim-log .del{color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px}
+  .scrim-log .del:hover{color:var(--molly)}
+  .empty-state{color:var(--muted);font-style:italic;padding:12px 0;text-align:center}
+
   section.map{display:none;padding:30px 0 10px}
   section.map.active{display:block}
   .map-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
@@ -330,6 +485,10 @@
   <button role="tab" aria-selected="false" data-map="anubis">Anubis</button>
   <button role="tab" aria-selected="false" data-map="cache">Cache<span class="new">NEW</span></button>
   <button role="tab" aria-selected="false" data-map="economy" class="econ-tab">Economy</button>
+  <button role="tab" aria-selected="false" data-map="timing" class="econ-tab">Timing</button>
+  <button role="tab" aria-selected="false" data-map="comms" class="econ-tab">Comms</button>
+  <button role="tab" aria-selected="false" data-map="scouting" class="econ-tab">Scouting</button>
+  <button role="tab" aria-selected="false" data-map="tracker" class="econ-tab">Tracker</button>
 </nav>
 
 <!-- ================= MIRAGE ================= -->
@@ -382,9 +541,25 @@
   <div class="sidelabel ct">CT-Side · Quick Reference</div>
   <div class="ct-box"><ul>
     <li><b>Setup:</b> 2A (site + jungle) · 1 mid window AWP · 2B (site + apps/market)</li>
-    <li><b>Retake A:</b> CT smoke means regroup connector + jungle, hit together with two flashes</li>
     <li><b>Force rounds:</b> stack B with 3, upgraded pistols, double-molly apps</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>3–2 from CT + Short</h4>
+      <p><b>Smoke</b> jungle-to-connector (blocks the rotator)</p>
+      <p><b>Flash</b> one over CT for the CT-line clear</p>
+      <p><b>Movement</b> 3 push CT + jungle, 2 come palace/short. Never solo-retake from connector.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>Apps + Market Together</h4>
+      <p><b>Smoke</b> apps (cuts the default plant crossfire)</p>
+      <p><b>Molly</b> default plant behind boxes</p>
+      <p><b>Flash</b> from CT over site. From apps + market at once — solo apps dies to bench crossfire.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= DUST2 ================= -->
@@ -437,8 +612,24 @@
   <div class="ct-box"><ul>
     <li><b>Setup:</b> 2 long (pit + corner) · 1 mid AWP at doors · 2 B (site + tunnels watch)</li>
     <li><b>Mid AWPer is the rotation engine</b> — never let them die for free</li>
-    <li><b>Retakes:</b> A from CT + short together · B from window + doors with full utility</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>CT + Short Together</h4>
+      <p><b>Smoke</b> long corner (blocks the long rotator/AWP)</p>
+      <p><b>Molly</b> default plant (goose or ct-side plant)</p>
+      <p><b>Movement</b> 3 CT, 2 short — hit on the flash. Short from ninja is real vs a default plant.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>Window + Doors</h4>
+      <p><b>Smoke</b> back plat (kills the back-site angle)</p>
+      <p><b>Molly</b> tunnels (cuts the flank rotate)</p>
+      <p><b>Flash</b> from doors over site. Hit together — never solo doors, that's a free frag for them.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= INFERNO ================= -->
@@ -491,8 +682,24 @@
   <div class="ct-box"><ul>
     <li><b>Setup:</b> 2 B (site + car/coffins) · 1 arch (IGL) · 2 A (pit + site/apps)</li>
     <li><b>B anchors survive 20 seconds</b> — you're not winning 1v5. Molly banana at 0:40 whenever affordable</li>
-    <li><b>Retake B:</b> regroup CT + arch, smoke banana, hit with double flash</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>CT + Apps Together</h4>
+      <p><b>Smoke</b> short-to-site (cuts short crossfire)</p>
+      <p><b>Molly</b> graveyard (default plant killer)</p>
+      <p><b>Flash</b> from CT. From CT + apps — never from 2nd mid, that angle is a death sentence.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>CT + Arch Regroup</h4>
+      <p><b>Smoke</b> banana (blocks the flank rotate)</p>
+      <p><b>Molly</b> coffins / new box (default plant zone)</p>
+      <p><b>Flash</b> from CT double, second player peeks. Arch player forgives dry-peeks — wait for the flash.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= NUKE ================= -->
@@ -547,6 +754,23 @@
     <li><b>Ramp player never dry-dies</b> — molly, fall to B, retake with your team alive</li>
     <li><b>Rotate through heaven/hell,</b> not outside, when outside is smoked</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>Heaven + Hell Together</h4>
+      <p><b>Smoke</b> main (blocks the entry-back flank)</p>
+      <p><b>Flash</b> through squeaky then over site</p>
+      <p><b>Movement</b> Never through ramp — you're rotating with rifles, don't dry-peek stacked crossfires.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>Ramp + Hell Squeeze</h4>
+      <p><b>Molly</b> vents (kills the boost angle)</p>
+      <p><b>Smoke</b> secret exit (cuts flank)</p>
+      <p><b>Movement</b> Ramp holder drops with the retake, heaven watches for boost-fake bait plants.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= ANCIENT ================= -->
@@ -601,6 +825,23 @@
     <li><b>Mid player is a tripwire, not a hero</b> — announce and fall back</li>
     <li><b>Molly ramp + main at 0:40</b> every gun round. Ancient CT-side is a utility war</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>CT + Short Regroup</h4>
+      <p><b>Smoke</b> A main (blocks the rotator/back cross)</p>
+      <p><b>Molly</b> default plant behind box</p>
+      <p><b>Flash</b> from CT/temple. Come together — donut is a solo-death spot.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>Cave + Short Together</h4>
+      <p><b>Smoke</b> short/CT cut (blocks post-plant crossfire)</p>
+      <p><b>Molly</b> pillar plant (their default)</p>
+      <p><b>Flash</b> from CT. From cave + short at once — the pincer is the whole play.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= ANUBIS ================= -->
@@ -653,8 +894,24 @@
   <div class="ct-box"><ul>
     <li><b>Setup:</b> 2 A (site + main watch) · 1 mid-connector · 2 B (site + water watch)</li>
     <li><b>Water is the blind spot</b> — utility or info-check it every round at 0:40</li>
-    <li><b>Retakes:</b> A from CT + heaven together · B from CT + upper with a water cut-off molly</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>CT + Heaven Together</h4>
+      <p><b>Smoke</b> A main (blocks the rotator)</p>
+      <p><b>Molly</b> default plant</p>
+      <p><b>Flash</b> from heaven, CT peeks on the pop. Watch for water flank — leave one player CT-side to check.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>CT + Upper Squeeze</h4>
+      <p><b>Molly</b> water (kills the flank rotate first)</p>
+      <p><b>Smoke</b> B main entry (blocks the retake-back)</p>
+      <p><b>Flash</b> from CT. Cut water before retaking, then hit with 3 minimum.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= CACHE ================= -->
@@ -712,6 +969,23 @@
     <li><b>Cache rewards AWPers</b> — give yours the mid or A-main sightline and keep them alive through rotations</li>
     <li><b>30 min/day on the CS2 version</b> until lineups are muscle memory. Most opponents don't know this map yet — outwork them</li>
   </ul></div>
+
+  <div class="retakes">
+    <div class="retake">
+      <span class="site-tag">A Retake</span>
+      <h4>CT + Heaven Together</h4>
+      <p><b>Smoke</b> A main (blocks the rotator)</p>
+      <p><b>Molly</b> default plant / dumpster</p>
+      <p><b>Flash</b> from CT. Come together — squeaky solo dies to the quad crossfire.</p>
+    </div>
+    <div class="retake">
+      <span class="site-tag">B Retake</span>
+      <h4>CT + Vents Squeeze</h4>
+      <p><b>Smoke</b> B main (blocks the retake-back)</p>
+      <p><b>Molly</b> close-left plant zone</p>
+      <p><b>Flash</b> from CT. From CT + vents at once — solo CT dies to the plant crossfire every time.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ================= ECONOMY ================= -->
@@ -884,6 +1158,182 @@
     <li><b>Half-time reset:</b> everyone starts $10k on side swap — plan rounds 16–17 like a fresh pistol + bonus.</li>
     <li><b>The 3-round rule:</b> if a lost round would break eco for 3+ rounds, save now even if it looks winnable.</li>
   </ul></div>
+</section>
+
+<!-- ================= TIMING ================= -->
+<section class="map" id="timing">
+  <div class="map-head"><h2>Timing</h2><span class="tagline">What should be happening at every mark.</span></div>
+  <p class="econ-intro">A 1:55 round has phases, not one long fight. Every player should know where they are in the round by the clock — freeze buy, default setup, control check, execute window, plant deadline. Miss the mark, lose the round.</p>
+
+  <div class="timeline">
+    <div class="tick">
+      <span class="time">1:55 · Freeze</span>
+      <h4>Buy Call</h4>
+      <p>IGL announces the round type <b>before</b> anyone buys. Bank check, drop assignments, strat name.</p>
+      <p><b>Comms:</b> "Full buy, running A-split, [name] drop AK, [name] drop flash."</p>
+    </div>
+    <div class="tick">
+      <span class="time">1:40 · Default Setup</span>
+      <h4>Positions</h4>
+      <p>Everyone to their default spot. E1+E2 pressure side, LRK opposite, AWP pick angle, IGL support.</p>
+      <p><b>Rule:</b> if you're still moving toward default at 1:35, you're late — no round-opening picks happen.</p>
+    </div>
+    <div class="tick">
+      <span class="time">1:15 · Control Check</span>
+      <h4>Info Sweep</h4>
+      <p>IGL asks each pair what they know. Who's holding where? What util has been used? What's the CT setup?</p>
+      <p><b>Decision point:</b> commit to a side, fake and rotate, or hold default longer.</p>
+    </div>
+    <div class="tick">
+      <span class="time">0:45 · Execute Window</span>
+      <h4>The Call</h4>
+      <p>IGL says "GO" and names the execute. Utility lands in 3 seconds, bodies move on the last flash.</p>
+      <p><b>Late-window rule:</b> if you're not in execute by 0:35, downgrade to a slow default. No panic hits.</p>
+    </div>
+    <div class="tick crit">
+      <span class="time">0:20 · Plant Deadline</span>
+      <h4>Bomb Down</h4>
+      <p>Plant must be in the ground by 0:20. Any later and you're planting under pressure with no post-plant time.</p>
+      <p><b>If you can't plant:</b> save. Do not throw utility for a dry defuse attempt.</p>
+    </div>
+    <div class="tick">
+      <span class="time">0:15 · Post-Plant Setup</span>
+      <h4>Crossfires</h4>
+      <p>2 site (crossfire), 1 close cover, 2 on the retake path. Never 5 on site — you die to one HE.</p>
+      <p><b>Save two smokes</b> for the retake sound (usually IGL + LRK held theirs through the hit).</p>
+    </div>
+    <div class="tick crit">
+      <span class="time">0:05 · Round End</span>
+      <h4>Comms Silence</h4>
+      <p>No talking except the caller during the last 5 seconds — clutch player needs to hear footsteps.</p>
+      <p><b>After the round:</b> death cam intel first, blame never. Fix it in the next freeze time.</p>
+    </div>
+  </div>
+
+  <div class="sidelabel ct">CT Timing Marks</div>
+  <div class="ct-box"><ul>
+    <li><b>1:40:</b> anchors in position, AWPer picking, rotators standing by info</li>
+    <li><b>1:15:</b> first molly window on choke points (banana, long, ramp)</li>
+    <li><b>0:45:</b> if no info, expect a slow default or fake — do NOT rotate off first sound</li>
+    <li><b>0:20:</b> plant should not be down yet — if it is, they broke you clean, reset for retake</li>
+    <li><b>Post-plant:</b> retake by 0:10 or don't retake. Late retakes = defuse impossible.</li>
+  </ul></div>
+</section>
+
+<!-- ================= COMMS ================= -->
+<section class="map" id="comms">
+  <div class="map-head"><h2>Comms</h2><span class="tagline">Same words, same meaning, every round.</span></div>
+  <p class="econ-intro">Bad comms lose more rounds than bad aim. The template below is what your IGL says every freeze time. The vocabulary is the words everyone means the same thing by. The demo review checklist is what to actually look at when watching opponents.</p>
+
+  <div class="sidelabel t">Pre-Round Template</div>
+  <div class="script">
+    <span class="line"><span class="lead">IGL:</span> "Bank check — [name] $X, [name] $Y…" <span class="muted">(only if buys are tight)</span></span>
+    <span class="line"><span class="lead">IGL:</span> "Full buy / force / eco. Running [strat name]."</span>
+    <span class="line"><span class="lead">IGL:</span> "[Name] drop [rifle] for [name]. [Name] drop [nade] for [name]."</span>
+    <span class="line"><span class="lead">IGL:</span> "Utility: [name] smoke [X], [name] smoke [Y], [name] flash [Z]."</span>
+    <span class="line"><span class="lead">EACH:</span> <span class="self">"Copy"</span> — everyone confirms once, no chatter until spawn.</span>
+    <span class="line muted">— round starts —</span>
+    <span class="line"><span class="lead">IGL @ 1:15:</span> "Info sweep. [Pair 1] what do you have?"</span>
+    <span class="line"><span class="lead">IGL @ 0:45:</span> "GO GO GO" <span class="muted">(or)</span> "Reset, slow default"</span>
+  </div>
+
+  <div class="sidelabel t">Mid-Round Vocabulary</div>
+  <p class="econ-intro">If two people mean different things by "rotate," you're losing rounds to comms. Standardize now.</p>
+  <dl class="vocab">
+    <div class="term"><dt>Rotate</dt><dd>Move to the other site. Named site required: "rotate B" not just "rotate."</dd></div>
+    <div class="term"><dt>Collapse</dt><dd>All available players converge on one site NOW. Emergency call — someone died or lost a fight.</dd></div>
+    <div class="term"><dt>Stack</dt><dd>Play multiple players on one site pre-emptively. "Stack B" = 3 minimum B before round start.</dd></div>
+    <div class="term"><dt>Cross</dt><dd>Second player crosses the choke after the first — trade setup. "Cross me" = follow me through.</dd></div>
+    <div class="term"><dt>Flood</dt><dd>All bodies commit to a choke on the execute. Different from a split — one entry point, mass.</dd></div>
+    <div class="term"><dt>Fade / Faded</dt><dd>Smoke is about to expire. "Smoke fading" = 2 seconds of util left, don't peek through it.</dd></div>
+    <div class="term"><dt>Peek / Wide / Off-angle</dt><dd>Peek = normal angle. Wide = uncommon holding spot. Off-angle = deep back cover, hidden.</dd></div>
+    <div class="term"><dt>Ninja</dt><dd>Sneak defuse behind cover / from a hidden angle. Called only when you're actually starting one.</dd></div>
+    <div class="term"><dt>Reset</dt><dd>Abandon execute, back to spread default, no util spent. Cheap round, gather info again.</dd></div>
+    <div class="term"><dt>Slow</dt><dd>Passive round, no aggression, hold defaults. On CT, save util for retake.</dd></div>
+    <div class="term"><dt>Fake</dt><dd>Show utility somewhere you're NOT hitting. Followed by the real call: "Fake A, hit B."</dd></div>
+    <div class="term"><dt>Save</dt><dd>Round is lost, everyone break contact and preserve guns. No hero peeks.</dd></div>
+    <div class="term"><dt>Force</dt><dd>Buy this round even though you should eco. Denial > next-round quality.</dd></div>
+    <div class="term"><dt>Lurk (verb)</dt><dd>Sit on flank/opposite side, cut rotates. Silent — no comms unless it's info that changes the play.</dd></div>
+    <div class="term"><dt>Trade</dt><dd>Kill the player who killed my teammate. "Traded" = we broke even on the fight.</dd></div>
+  </dl>
+
+  <div class="sidelabel ct">Demo Review Checklist</div>
+  <p class="econ-intro">Post-scrim demo review is 30 minutes MAX on lost gun rounds only. This is what to look for, not just "watch it."</p>
+  <div class="checklist">
+    <h4>What to Actually Look For</h4>
+    <label><input type="checkbox"><span> Round 1 opening angles — where does the AWPer pick? Every team has a default.</span></label>
+    <label><input type="checkbox"><span> First molly timings — anchor throws at 1:40? 1:15? Different responses needed.</span></label>
+    <label><input type="checkbox"><span> B anchor's habits — do they fall back on first sound, or hold and pray?</span></label>
+    <label><input type="checkbox"><span> Force-buy tells — what round after a lost pistol do they typically force?</span></label>
+    <label><input type="checkbox"><span> Post-plant positions — do they leave 5 on site, or set retake crossfires?</span></label>
+    <label><input type="checkbox"><span> Rotation speed — how fast does the mid player commit to a site call?</span></label>
+    <label><input type="checkbox"><span> IGL patterns — do they call the same execute after the same info? That's exploitable.</span></label>
+    <label><input type="checkbox"><span> Utility usage — full util every gun round, or do they save for retake? Predicts pressure tolerance.</span></label>
+    <label><input type="checkbox"><span> Individual weak links — one player who dies early consistently? Target them round 1.</span></label>
+    <label><input type="checkbox"><span> Half-time score → force pattern. Down 5+ at half almost always force round 16.</span></label>
+  </div>
+</section>
+
+<!-- ================= SCOUTING ================= -->
+<section class="map" id="scouting">
+  <div class="map-head"><h2>Scouting</h2><span class="tagline">Opponent notes, saved in your browser.</span></div>
+  <p class="econ-intro">Notes are stored locally on this device only. Sync between teammates by sharing screenshots or copying text. Nothing is uploaded anywhere.</p>
+
+  <div class="scout-controls">
+    <label for="scout-team">Opponent tag</label>
+    <input type="text" id="scout-team" placeholder="e.g. Team Liquid, ryzeUp, PUG lobby #3">
+    <button class="save-btn" id="scout-save">Save All</button>
+    <button class="clear-btn" id="scout-clear">Clear All Notes</button>
+  </div>
+
+  <div class="scout-grid" id="scout-grid">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<!-- ================= TRACKER ================= -->
+<section class="map" id="tracker">
+  <div class="map-head"><h2>Tracker</h2><span class="tagline">Log scrims, see trends.</span></div>
+  <p class="econ-intro">Add your roster, then log each scrim after it ends. Data lives in this browser only — export by screenshot if you want teammates to see it.</p>
+
+  <div class="sidelabel t">Roster</div>
+  <div class="roster" id="roster">
+    <!-- populated by JS -->
+  </div>
+
+  <div class="sidelabel t">Log a Scrim</div>
+  <div class="scrim-form">
+    <div class="row">
+      <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px">Date</label><input type="text" id="log-date" placeholder="2026-07-15"></div>
+      <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px">Opponent</label><input type="text" id="log-opp" placeholder="Team name"></div>
+      <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px">Result</label>
+        <select id="log-result">
+          <option value="W">Win</option>
+          <option value="L">Loss</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px">Map</label>
+        <select id="log-map">
+          <option>Mirage</option><option>Dust2</option><option>Inferno</option><option>Nuke</option>
+          <option>Ancient</option><option>Anubis</option><option>Cache</option>
+        </select>
+      </div>
+      <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px">Score (us–them)</label><input type="text" id="log-score" placeholder="13-9"></div>
+      <div></div>
+    </div>
+    <div class="stats" id="log-stats">
+      <!-- per-player K/D fields populated by JS -->
+    </div>
+    <button class="add-btn" id="log-add">Add Scrim</button>
+  </div>
+
+  <div class="sidelabel t">Scrim Log</div>
+  <div class="scrim-log">
+    <h3>Recent Sessions</h3>
+    <div id="scrim-table"></div>
+  </div>
 </section>
 
 <!-- ================= SYSTEMS ================= -->
@@ -1083,6 +1533,149 @@
   document.addEventListener('click', () => { if (pinned) { pinned = null; hideTip(); } });
   window.addEventListener('scroll', () => { if (!pinned) hideTip(); }, {passive:true});
   window.addEventListener('keydown', e => { if (e.key === 'Escape') { pinned = null; hideTip(); } });
+
+  // ---------- storage helpers ----------
+  const LS = {
+    get(k, def){ try { const v = localStorage.getItem(k); return v == null ? def : JSON.parse(v); } catch { return def; } },
+    set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } },
+    del(k){ try { localStorage.removeItem(k); } catch {} }
+  };
+
+  // ---------- scouting ----------
+  const MAP_NAMES = ['Mirage','Dust2','Inferno','Nuke','Ancient','Anubis','Cache'];
+  const scoutGrid = document.getElementById('scout-grid');
+  const scoutTeam = document.getElementById('scout-team');
+  const scoutSave = document.getElementById('scout-save');
+  const scoutClear = document.getElementById('scout-clear');
+
+  function scoutKey(){ return 'cs2pb.scout.' + (scoutTeam.value.trim() || '_default'); }
+  function renderScout(){
+    const data = LS.get(scoutKey(), {}) || {};
+    scoutGrid.innerHTML = '';
+    MAP_NAMES.forEach(map => {
+      const card = document.createElement('div');
+      card.className = 'scout-card';
+      const val = (data[map] || '').replace(/</g,'&lt;');
+      card.innerHTML = `
+        <h4>${map}</h4>
+        <textarea data-map="${map}" placeholder="Their AWPer's default angle, force-buy tells, B anchor habits…">${val}</textarea>`;
+      scoutGrid.appendChild(card);
+    });
+  }
+  scoutTeam.value = LS.get('cs2pb.scout.currentTeam', '');
+  scoutTeam.addEventListener('input', () => { LS.set('cs2pb.scout.currentTeam', scoutTeam.value); renderScout(); });
+  scoutSave.addEventListener('click', () => {
+    const data = {};
+    scoutGrid.querySelectorAll('textarea').forEach(ta => { data[ta.dataset.map] = ta.value; });
+    LS.set(scoutKey(), data);
+    scoutSave.classList.add('saved');
+    scoutSave.textContent = 'Saved ✓';
+    setTimeout(() => { scoutSave.classList.remove('saved'); scoutSave.textContent = 'Save All'; }, 1500);
+  });
+  scoutClear.addEventListener('click', () => {
+    if (!confirm('Clear all scouting notes for "' + (scoutTeam.value || 'default') + '"?')) return;
+    LS.del(scoutKey());
+    renderScout();
+  });
+  renderScout();
+
+  // ---------- tracker ----------
+  const rosterEl = document.getElementById('roster');
+  const logStats = document.getElementById('log-stats');
+  const scrimTable = document.getElementById('scrim-table');
+
+  function loadRoster(){ return LS.get('cs2pb.roster', [
+    {name:'', role:'IGL'}, {name:'', role:'E1'}, {name:'', role:'E2'}, {name:'', role:'AWP'}, {name:'', role:'LRK'}
+  ]); }
+  function saveRoster(r){ LS.set('cs2pb.roster', r); }
+  function renderRoster(){
+    const r = loadRoster();
+    rosterEl.innerHTML = '';
+    r.forEach((p, i) => {
+      const slot = document.createElement('div');
+      slot.className = 'slot';
+      slot.innerHTML = `<label>${p.role}</label><input type="text" data-i="${i}" placeholder="Player name" value="${(p.name||'').replace(/"/g,'&quot;')}">`;
+      rosterEl.appendChild(slot);
+    });
+    rosterEl.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const r2 = loadRoster();
+        r2[+inp.dataset.i].name = inp.value;
+        saveRoster(r2);
+        renderStatFields();
+      });
+    });
+  }
+  function renderStatFields(){
+    const r = loadRoster();
+    logStats.innerHTML = '';
+    r.forEach((p, i) => {
+      const div = document.createElement('div');
+      const label = (p.name || p.role) + ' K/D';
+      div.innerHTML = `<label>${label}</label><input type="text" data-i="${i}" placeholder="20/15">`;
+      logStats.appendChild(div);
+    });
+  }
+  function loadScrims(){ return LS.get('cs2pb.scrims', []); }
+  function saveScrims(s){ LS.set('cs2pb.scrims', s); }
+  function renderScrims(){
+    const s = loadScrims();
+    if (!s.length){ scrimTable.innerHTML = '<div class="empty-state">No scrims logged yet.</div>'; return; }
+    let html = '<table><thead><tr><th>Date</th><th>Opp</th><th>Map</th><th>Score</th><th>Result</th><th>K/D</th><th></th></tr></thead><tbody>';
+    s.slice().reverse().forEach((row) => {
+      const stats = (row.stats || []).map(x => `${x.name || x.role}: ${x.kd || '—'}`).join(' · ');
+      html += `<tr>
+        <td>${esc(row.date||'')}</td>
+        <td>${esc(row.opp||'')}</td>
+        <td>${esc(row.map||'')}</td>
+        <td>${esc(row.score||'')}</td>
+        <td class="${row.result==='W'?'win':'loss'}">${row.result||''}</td>
+        <td style="font-size:11px;color:var(--muted)">${esc(stats)}</td>
+        <td><span class="del" data-id="${row.id}">✕</span></td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    scrimTable.innerHTML = html;
+    scrimTable.querySelectorAll('.del').forEach(d => {
+      d.addEventListener('click', () => {
+        const s2 = loadScrims().filter(r => r.id !== +d.dataset.id);
+        saveScrims(s2);
+        renderScrims();
+      });
+    });
+  }
+  document.getElementById('log-add').addEventListener('click', () => {
+    const r = loadRoster();
+    const stats = [...logStats.querySelectorAll('input')].map((inp, i) => ({
+      role: r[i].role, name: r[i].name, kd: inp.value.trim()
+    }));
+    const row = {
+      id: Date.now(),
+      date: document.getElementById('log-date').value.trim() || new Date().toISOString().slice(0,10),
+      opp: document.getElementById('log-opp').value.trim(),
+      map: document.getElementById('log-map').value,
+      score: document.getElementById('log-score').value.trim(),
+      result: document.getElementById('log-result').value,
+      stats
+    };
+    if (!row.opp){ alert('Add an opponent name.'); return; }
+    const s = loadScrims(); s.push(row); saveScrims(s);
+    document.getElementById('log-opp').value = '';
+    document.getElementById('log-score').value = '';
+    logStats.querySelectorAll('input').forEach(i => i.value = '');
+    renderScrims();
+  });
+
+  renderRoster();
+  renderStatFields();
+  renderScrims();
+
+  // ---------- persist checklist state ----------
+  document.querySelectorAll('.checklist input[type="checkbox"]').forEach((cb, i) => {
+    const key = 'cs2pb.check.' + i;
+    cb.checked = LS.get(key, false);
+    cb.addEventListener('change', () => LS.set(key, cb.checked));
+  });
 </script>
 </body>
 </html>
